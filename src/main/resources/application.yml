@@ -1,8 +1,6 @@
 spring:
   application:
-    name: jinyinwu-wechat
-  profiles:
-    active: local
+    name: SucculentMan-host
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
@@ -14,22 +12,26 @@ spring:
   mvc:
     favicon:
       enabled: false
+  aop:
+    proxy-target-class: true
   freemarker:
     template-loader-path: ["classpath:/templates/", "classpath:/castemplates/"]
 
 app:
   manager:
-   host: http://www.tangdoudou.club/manager
+#   host: http://www.tangdoudou.club/manager
+   host: http://localhost:8080/manager
 
 server:
   context-path: /
   port: 8089
   compression:
     enabled: true
+  use-forward-headers: true
 
 #swagger API
 springfox:
   documentation:
     swagger:
       v2:
-        path: /api/api-docs
+        path: /api/v2/api-docs
