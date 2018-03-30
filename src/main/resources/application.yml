@@ -19,15 +19,14 @@ spring:
 
 app:
   manager:
-#   host: http://www.tangdoudou.club/manager
-   host: http://localhost:8080/manager
+   host: http://manager.tangdoudou.club/manager
+#   host: http://localhost:8080/manager
 
 server:
   context-path: /
   port: 8089
   compression:
     enabled: true
-  use-forward-headers: true
 
 #swagger API
 springfox:
