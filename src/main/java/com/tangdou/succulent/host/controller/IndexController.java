@@ -21,9 +21,9 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/header")
     public String home(){
-        return "home";
+        return "header";
     }
 
     @GetMapping("/error_404")

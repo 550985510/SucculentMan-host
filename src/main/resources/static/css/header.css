@@ -706,7 +706,7 @@ input.ipt:focus {
     border-radius: 0
 }
 
-.abtn button,.abtn:link,.abtn:visited,.ali,.btn,.btn u,.u-chk .chk,.u-chk label {
+.abtn button,.abtn:link,.abtn:visited,.ali,.u-chk .chk,.u-chk label {
 +display: inline;
     float: left
 }
@@ -767,16 +767,6 @@ input.uptxt {
 
 .u-chk label {
     margin: 0 16px 0 0
-}
-
-.btn {
-    height: 24px;
-    padding: 2px 24px 1px;
-    margin: 4px 8px 0 0;
-    overflow: hidden;
-    line-height: 1.5;
-    border: 1px solid #bad3e5;
-    background: url(../images/btn.gif?20111121) 0 -300px repeat-x #E3EDF5
 }
 
 .btn u {

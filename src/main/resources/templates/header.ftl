@@ -1,5 +1,6 @@
 <#import "/spring.ftl" as s>
 <script src="<@s.url '/js/lib.bundle.a6ecd17d.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="<@s.url '/css/theme.css'/>">
 <link rel="stylesheet" type="text/css" href="<@s.url '/css/header.css'/>">
 <style>
     .logo {
@@ -133,7 +134,7 @@
                                     </a>
                                 </div>
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a href="#">
+                                    <a href="#" style="text-decoration: none" data-toggle='modal' data-target="#registerModule">
                                         <div style="margin-top: 21px; background-color: #ff557c; color: #fff; width: 50px; height: 25px; border-radius: 5px; font-size: small; line-height: 25px">
                                             <span>注册</span>
                                         </div>
@@ -141,9 +142,9 @@
                                 </div>
                             </#if>
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank"
-                                       onmousedown="$.G.hmt('/lifeartist/home_top_entrance/')">
-                                        糖豆家萌店 <label class="dt-dreamer">new</label></a>
+                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank" style="text-decoration: none">
+                                        糖豆家萌店 <label class="dt-dreamer">new</label>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -153,14 +154,49 @@
             </div>
         </div>
     </div>
+
+    <!-- 添加文章 -->
+    <div id="registerModule" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">注册</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-group">
+                        <label for="moduleName" class="input-group-addon">手机号</label>
+                        <input id="moduleName" class="form-control" v-model="user.mobile">
+                    </div>
+                    <div class="form-group input-group">
+                        <label for="moduleType" class="input-group-addon">密  码</label>
+                        <input id="moduleType" class="form-control" v-model="user.passWord">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" v-on:click="register">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </div>
 <#include 'include/footer.ftl'/>
 <script>
     var app = new Vue({
         el: '#main_header',
-        data: {},
-        created: function () {
+        data: {
+            user: {}
         },
-        methods: {}
+        created: function () {
+
+        },
+        methods: {
+            register:function () {
+
+            }
+        }
     });
 </script>
