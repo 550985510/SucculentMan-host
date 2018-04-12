@@ -107,8 +107,8 @@
                                     <button>搜索</button>
                                 </form>
                             </div>
-                        <#if Session.user?exists>
                             <div id="dt-header-right">
+                            <#if Session.user?exists>
                                 <div id="dt-account" class="dt-has-menu dt-head-cat">
                                     <a class="dt-account-btn" href="member_index.html">
                                         <img class="dt-avatar" src="images/20131219205435_r3Lkv.thumb.48_48_c.jpeg"/>
@@ -124,15 +124,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="dt-vline"></div>
-                                <div class="dt-has-menu dt-head-cat">
-                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank"
-                                       onmousedown="$.G.hmt('/lifeartist/home_top_entrance/')">
-                                        糖豆家萌店 <label class="dt-dreamer">new</label></a>
-                                </div>
-                            </div>
-                        <#else >
-                            <div id="dt-header-right">
+                            <#else >
                                 <div class="dt-has-menu dt-head-cat">
                                     <a href="#" style="text-decoration: none">
                                         <div style="color: black; margin-top: 1px">
@@ -147,14 +139,13 @@
                                         </div>
                                     </a>
                                 </div>
+                            </#if>
                                 <div class="dt-has-menu dt-head-cat">
                                     <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank"
                                        onmousedown="$.G.hmt('/lifeartist/home_top_entrance/')">
-                                        糖豆家萌店 <label class="dt-dreamer">new</label>
-                                    </a>
+                                        糖豆家萌店 <label class="dt-dreamer">new</label></a>
                                 </div>
                             </div>
-                        </#if>
                         </div>
                     </div>
                     <div id="dt-header-btm"></div>
