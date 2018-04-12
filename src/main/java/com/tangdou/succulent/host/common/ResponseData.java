@@ -16,7 +16,7 @@ public class ResponseData implements Serializable {
     /**
      * 结果Code
      */
-    private String retcode;
+    private Integer retcode;
 
     /**
      * 结果message
@@ -91,11 +91,11 @@ public class ResponseData implements Serializable {
         return result;
     }
 
-    public String getRetcode() {
+    public Integer getRetcode() {
         return retcode;
     }
 
-    public void setRetcode(String retcode) {
+    public void setRetcode(Integer retcode) {
         this.retcode = retcode;
     }
 

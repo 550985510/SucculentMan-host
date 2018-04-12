@@ -19,8 +19,8 @@ spring:
 
 app:
   manager:
-   host: http://manager.tangdoudou.club/manager
-#   host: http://localhost:8080/manager
+#   host: http://manager.tangdoudou.club/manager
+   host: http://localhost:8080/manager
 
 server:
   context-path: /
