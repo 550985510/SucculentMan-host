@@ -2,6 +2,7 @@
 <script src="<@s.url '/js/lib.bundle.a6ecd17d.js'/>"></script>
 <link rel="stylesheet" type="text/css" href="<@s.url '/css/theme.css'/>">
 <link rel="stylesheet" type="text/css" href="<@s.url '/css/header.css'/>">
+<link rel="stylesheet" type="text/css" href="<@s.url '/plugins/sweetAlert/sweetalert.css'/>">
 <style>
     .logo {
         float: left;
@@ -157,7 +158,7 @@
 
     <!-- 添加文章 -->
     <div id="registerModule" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -165,13 +166,17 @@
                     <h4 class="modal-title">注册</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group input-group">
-                        <label for="moduleName" class="input-group-addon">手机号</label>
-                        <input id="moduleName" class="form-control" v-model="user.mobile">
+                    <div class="form-group">
+                        <label class="control-label">手&nbsp;机&nbsp;号</label>
+                        <input type="tel" class="form-control" v-model="user.mobile">
                     </div>
-                    <div class="form-group input-group">
-                        <label for="moduleType" class="input-group-addon">密  码</label>
-                        <input id="moduleType" class="form-control" v-model="user.passWord">
+                    <div class="form-group">
+                        <label class="control-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                        <input type="password" class="form-control" v-model="user.passWord">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">确认密码</label>
+                        <input type="password" class="form-control" v-model="user.passWord2">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -195,7 +200,15 @@
         },
         methods: {
             register:function () {
+                if (this.user.mobile == null) {
+                    swal("请输入手机号！");
+                } else if (this.user.passWord == null) {
+                    swal("请输入密码！");
+                } else if (this.user.passWord != this.user.passWord2) {
+                    swal("两次输入的密码不一致！")
+                } else {
 
+                }
             }
         }
     });
