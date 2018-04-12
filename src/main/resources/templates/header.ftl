@@ -9,9 +9,10 @@
         background: url(../img/logo.png) no-repeat left center;
         background-size: 80px 64px;
     }
+
     .wenzi {
         float: left;
-        margin-top:8px;
+        margin-top: 8px;
         width: 158px;
         height: 56px;
         background: url(../img/wenzi.png) no-repeat left center;
@@ -19,7 +20,8 @@
 </style>
 <div id="main_header">
     <div style="width: 100%; height: 65px;">
-        <div class="pnav-header SG-posfollow" style="position: fixed; bottom: auto; z-index: 998; width: 100%; height: 65px; left: 0px; right: auto; top: 0px;">
+        <div class="pnav-header SG-posfollow"
+             style="position: fixed; bottom: auto; z-index: 998; width: 100%; height: 65px; left: 0px; right: auto; top: 0px;">
             <div class="SG-sidecont">
                 <div id="header-wrap">
                     <div id="dt-header">
@@ -36,11 +38,11 @@
                                 <div id="dt-nav-content" class="clr">
                                     <div id="dt-nav-left">
                                         <div class="dt-nav-group">
-                                            <p> <a href="index.html">首页</a> </p>
-                                            <p> <a id="dt-nav-hot-link" href="cats.html">热门</a> </p>
+                                            <p><a href="index.html">首页</a></p>
+                                            <p><a id="dt-nav-hot-link" href="cats.html">热门</a></p>
                                         </div>
                                         <div class="dt-nav-group" style="margin-top: -30px;">
-                                            <p> <a href="shopping.html">良品购</a> </p>
+                                            <p><a href="shopping.html">良品购</a></p>
                                         </div>
                                     </div>
                                     <div id="dt-nav-right">
@@ -100,33 +102,18 @@
                                 <div id="dt-nav-neck"></div>
                             </div>
                             <div id="dt-search">
-                                <form action="search.html">
-                                    <input class="ipt" id="kw" autocomplete="off" name="kw" placeholder="搜索感兴趣的内容" type="text" />
-                                    <input id="type" name="type" value="feed" type="hidden" />
-                                    <button type="submit">搜索</button>
+                                <form>
+                                    <input class="ipt" placeholder="搜索感兴趣的内容" type="text"/>
+                                    <button>搜索</button>
                                 </form>
-                                <div id="dt-search-list">
-                                    <div class="dt-search-line hover">
-                                        搜索含
-                                        <span class="red"></span> 的内容
-                                    </div>
-                                    <div class="dt-search-line">
-                                        搜索含
-                                        <span class="red"></span> 的商品
-                                    </div>
-                                    <div class="dt-search-line">
-                                        搜索含
-                                        <span class="red"></span> 的专辑
-                                    </div>
-                                    <div class="dt-search-line">
-                                        搜索含
-                                        <span class="red"></span> 的糖人
-                                    </div>
-                                </div>
                             </div>
+                        <#if Session.user?exists>
                             <div id="dt-header-right">
                                 <div id="dt-account" class="dt-has-menu dt-head-cat">
-                                    <a class="dt-account-btn" href="member_index.html"> <img class="dt-avatar" src="images/20131219205435_r3Lkv.thumb.48_48_c.jpeg" /> <span>我的堆糖</span> <i></i> </a>
+                                    <a class="dt-account-btn" href="member_index.html">
+                                        <img class="dt-avatar" src="images/20131219205435_r3Lkv.thumb.48_48_c.jpeg"/>
+                                        <span>我的堆糖</span> <i></i>
+                                    </a>
                                     <div class="dt-menu">
                                         <div class="dt-menu-inner dt-menu-mini">
                                             <a id="mynavtools-home" href="member_index.html"> <i></i> 个人主页 </a>
@@ -139,9 +126,35 @@
                                 </div>
                                 <div class="dt-vline"></div>
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a class="dt-dreamer-a" id="dt-lifer" href="life.html" target="_blank" onmousedown="$.G.hmt('/lifeartist/home_top_entrance/')">糖豆家萌店 <label class="dt-dreamer">new</label></a>
+                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank"
+                                       onmousedown="$.G.hmt('/lifeartist/home_top_entrance/')">
+                                        糖豆家萌店 <label class="dt-dreamer">new</label></a>
                                 </div>
                             </div>
+                        <#else >
+                            <div id="dt-header-right">
+                                <div class="dt-has-menu dt-head-cat">
+                                    <a href="#" style="text-decoration: none">
+                                        <div style="color: black; margin-top: 1px">
+                                            <span>登录</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dt-has-menu dt-head-cat">
+                                    <a href="#">
+                                        <div style="margin-top: 21px; background-color: #ff557c; color: #fff; width: 50px; height: 25px; border-radius: 5px; font-size: small; line-height: 25px">
+                                            <span>注册</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dt-has-menu dt-head-cat">
+                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank"
+                                       onmousedown="$.G.hmt('/lifeartist/home_top_entrance/')">
+                                        糖豆家萌店 <label class="dt-dreamer">new</label>
+                                    </a>
+                                </div>
+                            </div>
+                        </#if>
                         </div>
                     </div>
                     <div id="dt-header-btm"></div>
@@ -154,18 +167,9 @@
 <script>
     var app = new Vue({
         el: '#main_header',
-        data: {
-            message: '默认值'
-        },
+        data: {},
         created: function () {
         },
-        methods: {
-            enter: function(){
-                this.message = '修改值';
-            },
-            leave: function(){
-                this.message = '默认值';
-            }
-        }
+        methods: {}
     });
 </script>
