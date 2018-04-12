@@ -1,5 +1,6 @@
 package com.tangdou.succulent.host.config;
 
+import com.tangdou.succulent.host.interceptor.LoginInterceptor;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,10 +12,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import javax.annotation.Resource;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +27,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Resource
+    private LoginInterceptor loginInterceptor;
 
     /**
      * 静态资源映射
@@ -40,6 +46,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations("classpath:/static/")
                 .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
         super.addResourceHandlers(registry);
+    }
+
+    /**
+     * 配置登录状态
+     * 只拦截需要保护的资源
+     *
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor)
+                //需要被拦截的请求地址
+                .addPathPatterns("/api/v1/**");
     }
 
     /**
