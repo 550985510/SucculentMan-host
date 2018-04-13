@@ -55,7 +55,7 @@ public enum ResponseCode {
 
     ERROR_MOBILE_EXIST(1005000, "该手机已注册"),
     ERROR_MOBILE_EMPTY(1005001, "手机输入为空"),
-    ERROR_MOBILE_FORMAT(1005002, "手机地址格式错误"),
+    ERROR_MOBILE_FORMAT(1005002, "手机号格式错误"),
     ERROR_MOBILE_NOT_BIND(1005003, "未绑定手机号"),
 
     ERROR_POST_EMPTY(1006000, "post相关字段空"),

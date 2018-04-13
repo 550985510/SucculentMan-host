@@ -58,7 +58,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
                 //需要被拦截的请求地址
-                .addPathPatterns("/api/v1/**");
+                .addPathPatterns("/api/v1/null");
     }
 
     /**

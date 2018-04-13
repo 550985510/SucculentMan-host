@@ -30,17 +30,32 @@ public class UserApi {
     @Resource
     private UserServiceApi userServiceApi;
 
+    /**
+     * 用户注册
+     * @param rxUser 注册信息
+     * @param session session
+     * @return 操作状态
+     */
     @PostMapping("/register")
-    public ResponseData register(@RequestBody RxUser rxUser) {
+    public ResponseData register(@RequestBody RxUser rxUser, HttpSession session) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
         ResponseResult responseResult = userServiceApi.register(rxUser.getMobile(), rxUser.getPassWord());
         if (RestResultEnum.SUCCESS.getKey() != responseResult.getRetcode()) {
             result.setRetcode(responseResult.getRetcode());
             result.setMessage(responseResult.getMsg());
         }
+        //注册成功后自动登陆
+        User user = (User) userServiceApi.login(rxUser.getMobile(), rxUser.getPassWord()).getData();
+        session.setAttribute(LoginInterceptor.SESSION_KEY, user);
         return result;
     }
 
+    /**
+     * 用户登陆
+     * @param rxUser 注册信息
+     * @param session session
+     * @return 操作状态
+     */
     @PostMapping("/login")
     public ResponseData login(@RequestBody RxUser rxUser, HttpSession session) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
@@ -52,5 +67,11 @@ public class UserApi {
         User user = (User) responseResult.getData();
         session.setAttribute(LoginInterceptor.SESSION_KEY, user);
         return result;
+    }
+
+    @PostMapping("/logout")
+    public ResponseData logout(HttpSession session) {
+        session.removeAttribute(LoginInterceptor.SESSION_KEY);
+        return new ResponseData(ResponseCode.SUCCESS);
     }
 }

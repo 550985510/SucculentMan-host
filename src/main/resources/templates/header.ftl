@@ -121,7 +121,7 @@
                                             <a id="mynavtools-home" href="member_index.html"> <i></i> 个人主页 </a>
                                             <a id="mynavtools-setting" href="member_info.html"> <i></i> 账号设置 </a>
                                             <div class="dt-menu-bottom">
-                                                <a id="mynavtools-logout" href="/logout/?next=/404/"> <i></i> 退出 </a>
+                                                <a id="mynavtools-logout" href="#" v-on:click="logout"> <i></i> 退出 </a>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +193,8 @@
     var app = new Vue({
         el: '#main_header',
         data: {
-            user: {}
+            user: {},
+            regMobile: {}
         },
         created: function () {
 
@@ -201,14 +202,76 @@
         methods: {
             register:function () {
                 if (this.user.mobile == null) {
-                    swal("请输入手机号！");
+                    swal("请输入手机号!", "", "error");
                 } else if (this.user.passWord == null) {
-                    swal("请输入密码！");
+                    swal("请输入密码!", "", "error");
                 } else if (this.user.passWord != this.user.passWord2) {
-                    swal("两次输入的密码不一致！")
+                    swal("两次密码输入不一致!", "", "error")
                 } else {
-
+                    this.checkMobile();
+                    if (this.regMobile.retcode != 2000000 && this.regMobile.msg != null) {
+                        swal(this.regMobile.msg, "", "error");
+                    } else {
+                        var url = "/api/user/register";
+                        this.$http.post(url, this.user).then(function (response) {
+                            if (response.data.retcode != 2000000) {
+                                swal(response.data.msg, "", "error");
+                            } else {
+                                $("#registerModule").modal('hide');
+                                swal({
+                                    title: "注册成功!",
+                                    text: "",
+                                    type: "success"
+                                }, function () {
+                                    location.reload();
+                                });
+                            }
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    }
                 }
+            },
+            login: function () {
+                
+            },
+            logout: function () {
+                var that = this;
+                swal({
+                    title: "确定退出当前账户吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定！",
+                    cancelButtonText: "取消！",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        var url = "/api/user/logout";
+                        that.$http.post(url).then(function (response) {
+                            swal({
+                                title: "操作成功!",
+                                text: "",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    } else {
+                        swal("取消！", "", "error");
+                    }
+                });
+            },
+            checkMobile: function () {
+                var url = "/api/check/mobile?mobile=" + this.user.mobile;
+                this.$http.post(url).then(function (response) {
+                    this.regMobile = response.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
             }
         }
     });
