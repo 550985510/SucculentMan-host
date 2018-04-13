@@ -128,7 +128,7 @@
                                 </div>
                             <#else >
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a href="#" style="text-decoration: none">
+                                    <a href="#" style="text-decoration: none" data-toggle='modal' data-target="#loginModule">
                                         <div style="color: black; margin-top: 1px">
                                             <span>登录</span>
                                         </div>
@@ -156,7 +156,7 @@
         </div>
     </div>
 
-    <!-- 添加文章 -->
+    <!-- 用户注册 -->
     <div id="registerModule" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -182,6 +182,33 @@
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">取消</button>
                     <button class="btn btn-primary" v-on:click="register">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- 用户登陆 -->
+    <div id="loginModule" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">登陆</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">手&nbsp;机&nbsp;号</label>
+                        <input type="tel" class="form-control" v-model="user.mobile">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                        <input type="password" class="form-control" v-model="user.passWord">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" v-on:click="login">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -233,7 +260,34 @@
                 }
             },
             login: function () {
-                
+                if (this.user.mobile == null) {
+                    swal("请输入手机号!", "", "error");
+                } else if (this.user.passWord == null) {
+                    swal("请输入密码!", "", "error");
+                }  else {
+                    this.checkMobile();
+                    if (this.regMobile.retcode != 2000000 && this.regMobile.msg != null) {
+                        swal(this.regMobile.msg, "", "error");
+                    } else {
+                        var url = "/api/user/login";
+                        this.$http.post(url, this.user).then(function (response) {
+                            if (response.data.retcode != 2000000) {
+                                swal(response.data.msg, "", "error");
+                            } else {
+                                $("#loginModule").modal('hide');
+                                swal({
+                                    title: "登陆成功!",
+                                    text: "",
+                                    type: "success"
+                                }, function () {
+                                    location.reload();
+                                });
+                            }
+                        }, function (error) {
+                            swal(error.body.msg);
+                        });
+                    }
+                }
             },
             logout: function () {
                 var that = this;
