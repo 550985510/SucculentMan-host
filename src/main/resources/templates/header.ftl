@@ -156,6 +156,13 @@
         </div>
     </div>
 
+    <footer class="footer navbar-fixed-bottom" :style="{'z-index': zIndex}">
+        <div class="container" style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
+            <h5>Copyright © 2011-2018</h5>
+            <h5>豫ICP备17017969号-1 多肉达人信息技术有限责任公司版权所有</h5>
+        </div>
+    </footer>
+
     <!-- 用户注册 -->
     <div id="registerModule" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -217,16 +224,39 @@
 </div>
 <#include 'include/footer.ftl'/>
 <script>
+    $(window).scroll(function(){
+        var scrollTop = $(window).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(window).height();
+        if(scrollTop + windowHeight == scrollHeight){
+            alert("已经到最底部了！");
+            console.log("已经到最底部了！");
+        }
+    });
+
     var app = new Vue({
         el: '#main_header',
         data: {
             user: {},
-            regMobile: {}
+            regMobile: {},
+            zIndex: 0
         },
         created: function () {
 
         },
+        mounted: function () {
+            window.addEventListener('scroll', this.handleScroll);
+        },
         methods: {
+            handleScroll:function() {
+                //监听滚动高度
+                var scrollTop = document.documentElement.scrollTop;
+                if (scrollTop > document.documentElement.scrollHeight - document.documentElement.offsetHeight) {
+                    this.zIndex = 1030;
+                } else {
+                    this.zIndex = 0;
+                }
+            },
             register:function () {
                 if (this.user.mobile == null) {
                     swal("请输入手机号!", "", "error");

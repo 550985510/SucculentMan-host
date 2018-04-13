@@ -22,7 +22,7 @@ public class IndexController {
     }
 
     @GetMapping("/header")
-    public String home(){
+    public String header(){
         return "header";
     }
 
