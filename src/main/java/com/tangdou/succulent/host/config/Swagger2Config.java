@@ -35,7 +35,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("多肉达人前端页面")
+                .title("多肉达人前端接口")
                 .description("多肉达人前端页面接口模拟工具")
                 .version("1.0")
                 .build();

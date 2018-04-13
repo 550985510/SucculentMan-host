@@ -248,7 +248,7 @@
                     closeOnCancel: false
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        var url = "/api/user/logout";
+                        var url =  "/api/user/logout";
                         that.$http.post(url).then(function (response) {
                             swal({
                                 title: "操作成功!",
