@@ -1,4 +1,6 @@
 <#import "/spring.ftl" as s>
+<!DOCTYPE html>
+<html lang="en">
 <script src="<@s.url '/js/lib.bundle.a6ecd17d.js'/>"></script>
 <link rel="stylesheet" type="text/css" href="<@s.url '/css/theme.css'/>">
 <link rel="stylesheet" type="text/css" href="<@s.url '/css/header.css'/>">
@@ -20,6 +22,7 @@
         background: url(/img/wenzi.png) no-repeat left center;
     }
 </style>
+<body>
 <div id="main_header">
     <div style="width: 100%; height: 65px;">
         <div class="pnav-header SG-posfollow"
@@ -352,3 +355,5 @@
         }
     });
 </script>
+</body>
+</html>
