@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 /**
+ * 主页路由
  * @author 木叶丸
  * @date 2017/12/12
  */

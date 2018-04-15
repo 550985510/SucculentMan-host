@@ -17,11 +17,11 @@
          </h4>
          <div>
             <div class="float-left">
-                <img src="../img/ds-1.gif">
+                <img src="/img/ds-1.gif">
                 <div class="alert"> 艾玛！没有访问权限！ </div>
             </div>
             <div class="float-right">
-               <img src="../img/ds-2.png" width="260">
+               <img src="/img/ds-2.png" width="260">
             </div>
           </div>
           <div class="padding-big">

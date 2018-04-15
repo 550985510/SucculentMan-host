@@ -8,7 +8,7 @@
         float: left;
         width: 80px;
         height: 64px;
-        background: url(../img/logo.png) no-repeat left center;
+        background: url(/img/logo.png) no-repeat left center;
         background-size: 80px 64px;
     }
 
@@ -17,7 +17,7 @@
         margin-top: 8px;
         width: 158px;
         height: 56px;
-        background: url(../img/wenzi.png) no-repeat left center;
+        background: url(/img/wenzi.png) no-repeat left center;
     }
 </style>
 <div id="main_header">
@@ -28,8 +28,8 @@
                 <div id="header-wrap">
                     <div id="dt-header">
                         <div class="dt-wrap">
-                            <a href="#" class="logo"></a>
-                            <div><a href="#" class="wenzi"></a></div>
+                            <a href="/" class="logo"></a>
+                            <div><a href="/" class="wenzi"></a></div>
                             <div id="dt-nav">
                                 <div id="dt-nav-btn-cover"></div>
                                 <div id="dt-nav-btn">
@@ -118,8 +118,8 @@
                                     </a>
                                     <div class="dt-menu">
                                         <div class="dt-menu-inner dt-menu-mini">
-                                            <a id="mynavtools-home" href="member_index.html"> <i></i> 个人主页 </a>
-                                            <a id="mynavtools-setting" href="member_info.html"> <i></i> 账号设置 </a>
+                                            <a id="mynavtools-home" href="/user/personalCenter/${Session.user.id}"> <i></i> 个人主页 </a>
+                                            <a id="mynavtools-setting" href="/user/accountEdit"> <i></i> 账号设置 </a>
                                             <div class="dt-menu-bottom">
                                                 <a id="mynavtools-logout" href="#" v-on:click="logout"> <i></i> 退出 </a>
                                             </div>
@@ -156,7 +156,7 @@
         </div>
     </div>
 
-    <footer class="footer navbar-fixed-bottom" :style="{'z-index': zIndex}">
+    <footer id="footer" class="footer navbar-fixed-bottom" :style="{'z-index': zIndex}" style="background-color: #f5f5f5">
         <div class="container" style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
             <h5>Copyright © 2011-2018</h5>
             <h5>豫ICP备17017969号-1 多肉达人信息技术有限责任公司版权所有</h5>
@@ -224,22 +224,12 @@
 </div>
 <#include 'include/footer.ftl'/>
 <script>
-    $(window).scroll(function(){
-        var scrollTop = $(window).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(window).height();
-        if(scrollTop + windowHeight == scrollHeight){
-            alert("已经到最底部了！");
-            console.log("已经到最底部了！");
-        }
-    });
-
     var app = new Vue({
         el: '#main_header',
         data: {
             user: {},
             regMobile: {},
-            zIndex: 0
+            zIndex: -1
         },
         created: function () {
 
@@ -253,8 +243,10 @@
                 var scrollTop = document.documentElement.scrollTop;
                 if (scrollTop > document.documentElement.scrollHeight - document.documentElement.offsetHeight) {
                     this.zIndex = 1030;
+                    $("#footer").show();
                 } else {
-                    this.zIndex = 0;
+                    this.zIndex = -1;
+                    $("#footer").hide();
                 }
             },
             register:function () {

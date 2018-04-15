@@ -50,7 +50,6 @@ body {
 /* ====== main ====== */
 .main {
   position: relative;
-  background-color: #f1f2f3;
 }
 .main-inner  {
   padding-top: 40px;
@@ -546,7 +545,6 @@ body {
 
 /* ====== footer ====== */
 .footer {
-  border-top: 1px solid #d8d9da;
   background-color: #e1e2e3;
 }
 .footer-container {
