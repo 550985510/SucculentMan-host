@@ -113,7 +113,7 @@
                             <#if Session.user?exists>
                                 <div id="dt-account" class="dt-has-menu dt-head-cat">
                                     <a class="dt-account-btn" href="member_index.html">
-                                        <img class="dt-avatar" src="images/20131219205435_r3Lkv.thumb.48_48_c.jpeg"/>
+                                        <img class="dt-avatar" src="${Session.user.avatar}"/>
                                         <span>我的堆糖</span> <i></i>
                                     </a>
                                     <div class="dt-menu">

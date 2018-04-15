@@ -2230,6 +2230,7 @@ a.dt-account-btn {
     height: 36px;
     margin: 13px 0 0;
     border-radius: 36px;
+    border: 1px solid #e6e6e6;
     -webkit-transition: -webkit-transform .4s ease-out;
     -moz-transition: -moz-transform .4s ease-out;
     -o-transition: -o-transform .4s ease-out;
