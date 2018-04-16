@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <title>个人中心 </title>
     <link rel="stylesheet" type="text/css" href="<@s.url '/css/theme.css'/>">
     <link rel="stylesheet" type="text/css" href="<@s.url '/plugins/sweetAlert/sweetalert.css'/>">
 </head>
@@ -15,6 +15,7 @@
             <div class="panel col-md-3">
                 <div class="panel-body" align="center">
                     <img v-bind:src="userInfo.avatar" class="img-circle img-responsive" style="width: 150px; height: 150px; border: 3px solid #f8f8f8">
+                    <h3 style="margin: 10px">{{userInfo.nickName}}</h3>
                 </div>
             </div>
             <div class="panel col-md-8">
