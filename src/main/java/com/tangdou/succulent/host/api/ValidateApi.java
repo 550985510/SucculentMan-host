@@ -37,4 +37,14 @@ public class ValidateApi {
             return new ResponseData(ResponseCode.SUCCESS);
         }
     }
+
+    @PostMapping("/nickName")
+    @ApiOperation("昵称校验")
+    public ResponseData checkNickName(@RequestParam("nickName") String nickName) {
+        if(nickName.length() < 2 || nickName.length() > 32) {
+            return new ResponseData(ResponseCode.ERROR_NICKNAME_FORMAT);
+        }else{
+            return new ResponseData(ResponseCode.SUCCESS);
+        }
+    }
 }

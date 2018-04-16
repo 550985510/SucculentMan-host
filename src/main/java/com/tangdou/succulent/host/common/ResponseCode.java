@@ -22,6 +22,8 @@ public enum ResponseCode {
     ERROR_CAPTCHA_NOT_MATCH(1000005, "验证码错误"),
     ERROR_ACCESS_FORBIDDEN(1000006, "未授权,禁止访问"),
     ERROR_BUSINESS_NOT_EXIST(1000007, "商务不存在"),
+    ERROR_NICKNAME_FORMAT(1000008, "请输入2-32位字符作为昵称"),
+    ERROR_NICKNAME_EXIST(1000008, "昵称已存在"),
 
     //注册错误提示
     ERROR_EMAIL_EXIST(1001000, "该邮箱已注册"),

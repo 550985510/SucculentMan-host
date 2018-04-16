@@ -19,4 +19,9 @@ public class RxUser {
      * 密码
      */
     private String passWord;
+
+    /**
+     * 昵称
+     */
+    private String nickName;
 }

@@ -115,13 +115,14 @@
                             <div id="dt-header-right">
                             <#if Session.user?exists>
                                 <div id="dt-account" class="dt-has-menu dt-head-cat">
-                                    <a class="dt-account-btn" href="member_index.html">
+                                    <a class="dt-account-btn" href="#">
                                         <img class="dt-avatar" src="${Session.user.avatar}"/>
                                         <span>我的堆糖</span> <i></i>
                                     </a>
                                     <div class="dt-menu">
                                         <div class="dt-menu-inner dt-menu-mini">
-                                            <a id="mynavtools-home" href="/user/personalCenter/${Session.user.id}"> <i></i> 个人主页 </a>
+                                            <a id="mynavtools-home" href="/user/personalCenter/${Session.user.id}">
+                                                <i></i> 个人主页 </a>
                                             <a id="mynavtools-setting" href="/user/accountEdit"> <i></i> 账号设置 </a>
                                             <div class="dt-menu-bottom">
                                                 <a id="mynavtools-logout" href="#" v-on:click="logout"> <i></i> 退出 </a>
@@ -131,14 +132,16 @@
                                 </div>
                             <#else >
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a href="#" style="text-decoration: none" data-toggle='modal' data-target="#loginModule">
+                                    <a href="#" style="text-decoration: none" data-toggle='modal'
+                                       data-target="#loginModule">
                                         <div style="color: black; margin-top: 1px">
                                             <span>登录</span>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a href="#" style="text-decoration: none" data-toggle='modal' data-target="#registerModule">
+                                    <a href="#" style="text-decoration: none" data-toggle='modal'
+                                       data-target="#registerModule">
                                         <div style="margin-top: 21px; background-color: #ff557c; color: #fff; width: 50px; height: 25px; border-radius: 5px; font-size: small; line-height: 25px">
                                             <span>注册</span>
                                         </div>
@@ -146,7 +149,8 @@
                                 </div>
                             </#if>
                                 <div class="dt-has-menu dt-head-cat">
-                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank" style="text-decoration: none">
+                                    <a class="dt-dreamer-a" id="dt-lifer" href="#" target="_blank"
+                                       style="text-decoration: none">
                                         糖豆家萌店 <label class="dt-dreamer">new</label>
                                     </a>
                                 </div>
@@ -159,7 +163,8 @@
         </div>
     </div>
 
-    <footer id="footer" class="footer navbar-fixed-bottom" :style="{'z-index': zIndex}" style="background-color: #f5f5f5">
+    <footer id="footer" class="footer navbar-fixed-bottom" :style="{'z-index': zIndex}"
+            style="background-color: #f5f5f5">
         <div class="container" style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
             <h5>Copyright © 2011-2018</h5>
             <h5>豫ICP备17017969号-1 多肉达人信息技术有限责任公司版权所有</h5>
@@ -178,7 +183,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label">手&nbsp;机&nbsp;号</label>
-                        <input type="tel" class="form-control" v-model="user.mobile">
+                        <input type="text" class="form-control" v-model="user.mobile">
                     </div>
                     <div class="form-group">
                         <label class="control-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
@@ -188,10 +193,14 @@
                         <label class="control-label">确认密码</label>
                         <input type="password" class="form-control" v-model="user.passWord2">
                     </div>
+                    <div class="form-group">
+                        <label class="control-label">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+                        <input type="text" class="form-control" v-model="user.nickName">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button class="btn btn-primary" v-on:click="register">确认</button>
+                    <button class="btn btn-primary" v-on:click="register">注册</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -209,7 +218,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label">手&nbsp;机&nbsp;号</label>
-                        <input type="tel" class="form-control" v-model="user.mobile">
+                        <input type="text" class="form-control" v-model="user.mobile">
                     </div>
                     <div class="form-group">
                         <label class="control-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
@@ -218,7 +227,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button class="btn btn-primary" v-on:click="login">确认</button>
+                    <button class="btn btn-primary" v-on:click="login">登陆</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -227,11 +236,12 @@
 </div>
 <#include 'include/footer.ftl'/>
 <script>
-    var app = new Vue({
+    var headerApp = new Vue({
         el: '#main_header',
         data: {
             user: {},
             regMobile: {},
+            regNickName: {},
             zIndex: -1
         },
         created: function () {
@@ -241,7 +251,7 @@
             window.addEventListener('scroll', this.handleScroll);
         },
         methods: {
-            handleScroll:function() {
+            handleScroll: function () {
                 //监听滚动高度
                 var scrollTop = document.documentElement.scrollTop;
                 if (scrollTop > document.documentElement.scrollHeight - document.documentElement.offsetHeight) {
@@ -252,35 +262,42 @@
                     $("#footer").hide();
                 }
             },
-            register:function () {
+            register: function () {
                 if (this.user.mobile == null) {
                     swal("请输入手机号!", "", "error");
                 } else if (this.user.passWord == null) {
                     swal("请输入密码!", "", "error");
                 } else if (this.user.passWord != this.user.passWord2) {
                     swal("两次密码输入不一致!", "", "error")
+                } else if (this.user.nickName == null) {
+                    swal("请输入昵称!", "", "error")
                 } else {
                     this.checkMobile();
                     if (this.regMobile.retcode != 2000000 && this.regMobile.msg != null) {
                         swal(this.regMobile.msg, "", "error");
                     } else {
-                        var url = "/api/user/register";
-                        this.$http.post(url, this.user).then(function (response) {
-                            if (response.data.retcode != 2000000) {
-                                swal(response.data.msg, "", "error");
-                            } else {
-                                $("#registerModule").modal('hide');
-                                swal({
-                                    title: "注册成功!",
-                                    text: "",
-                                    type: "success"
-                                }, function () {
-                                    location.reload();
-                                });
-                            }
-                        }, function (error) {
-                            swal(error.body.msg);
-                        });
+                        this.checkNickName();
+                        if (this.regNickName.retcode != 2000000 && this.regNickName.msg != null) {
+                            swal(this.regNickName.msg, "", "error");
+                        } else {
+                            var url = "/api/user/register";
+                            this.$http.post(url, this.user).then(function (response) {
+                                if (response.data.retcode != 2000000) {
+                                    swal(response.data.msg, "", "error");
+                                } else {
+                                    $("#registerModule").modal('hide');
+                                    swal({
+                                        title: "注册成功!",
+                                        text: "",
+                                        type: "success"
+                                    }, function () {
+                                        location.reload();
+                                    });
+                                }
+                            }, function (error) {
+                                swal(error.body.msg);
+                            });
+                        }
                     }
                 }
             },
@@ -289,7 +306,7 @@
                     swal("请输入手机号!", "", "error");
                 } else if (this.user.passWord == null) {
                     swal("请输入密码!", "", "error");
-                }  else {
+                } else {
                     this.checkMobile();
                     if (this.regMobile.retcode != 2000000 && this.regMobile.msg != null) {
                         swal(this.regMobile.msg, "", "error");
@@ -327,7 +344,7 @@
                     closeOnCancel: false
                 }, function (isConfirm) {
                     if (isConfirm) {
-                        var url =  "/api/user/logout";
+                        var url = "/api/user/logout";
                         that.$http.post(url).then(function (response) {
                             swal({
                                 title: "操作成功!",
@@ -348,6 +365,14 @@
                 var url = "/api/check/mobile?mobile=" + this.user.mobile;
                 this.$http.post(url).then(function (response) {
                     this.regMobile = response.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            checkNickName: function () {
+                var url = "/api/check/nickName?nickName=" + this.user.nickName;
+                this.$http.post(url).then(function (response) {
+                    this.regNickName = response.data;
                 }, function (error) {
                     swal(error.body.msg);
                 });

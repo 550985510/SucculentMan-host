@@ -9,13 +9,12 @@
 </head>
 <body>
 <#include '../header.ftl'/>
-<div class="main">
+<div id="app" class="main">
     <section id="content" class="table-layout">
         <div class="tray tray-center row">
             <div class="panel col-md-3">
                 <div class="panel-body" align="center">
-                    <img src="${Session.user.avatar}" class="img-responsive img-circle">
-                    <img src="http://manager.tangdoudou.club/manager/02057561-318a-4e0a-b46d-38b8496ed1db-201803211423.jpg" class="img-circle img-responsive" width="200px" height="200px">
+                    <img v-bind:src="userInfo.avatar" class="img-circle img-responsive" style="width: 150px; height: 150px; border: 3px solid #f8f8f8">
                 </div>
             </div>
             <div class="panel col-md-8">
@@ -27,17 +26,26 @@
 <#include '../include/footer.ftl'/>
 <script>
     var app = new Vue({
-        el: '#main',
+        el: '#app',
         data: {
-            id: ${userId}
+            id: ${userId},
+            userInfo: {}
         },
         created: function () {
-            console.log(this.id)
+            this.query();
         },
         mounted: function () {
         },
         methods: {
-
+            query: function () {
+                var url = "/api/user/findById?id=" + this.id;
+                this.$http.get(url, this.id).then(function (response) {
+                    this.userInfo = response.data.data;
+                    console.log(this.userInfo)
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            }
         }
     });
 </script>

@@ -10,10 +10,7 @@ import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import com.tangdou.succulent.manager.api.user.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -41,14 +38,15 @@ public class UserApi {
     @ApiOperation("用户注册")
     public ResponseData register(@RequestBody RxUser rxUser, HttpSession session) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
-        ResponseResult responseResult = userServiceApi.register(rxUser.getMobile(), rxUser.getPassWord());
+        ResponseResult responseResult = userServiceApi.register(rxUser.getMobile(), rxUser.getPassWord(), rxUser.getNickName());
         if (RestResultEnum.SUCCESS.getKey() != responseResult.getRetcode()) {
             result.setRetcode(responseResult.getRetcode());
             result.setMessage(responseResult.getMsg());
+        } else {
+            //注册成功后自动登陆
+            User user = (User) userServiceApi.login(rxUser.getMobile(), rxUser.getPassWord()).getData();
+            session.setAttribute(LoginInterceptor.SESSION_KEY, user);
         }
-        //注册成功后自动登陆
-        User user = (User) userServiceApi.login(rxUser.getMobile(), rxUser.getPassWord()).getData();
-        session.setAttribute(LoginInterceptor.SESSION_KEY, user);
         return result;
     }
 
@@ -77,5 +75,14 @@ public class UserApi {
     public ResponseData logout(HttpSession session) {
         session.removeAttribute(LoginInterceptor.SESSION_KEY);
         return new ResponseData(ResponseCode.SUCCESS);
+    }
+
+    @GetMapping("/findById")
+    @ApiOperation("通过id查询用户信息")
+    public ResponseData findById(Integer id) {
+        ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
+        ResponseResult responseResult = userServiceApi.findById(id);
+        result.setData(responseResult.getData());
+        return result;
     }
 }
