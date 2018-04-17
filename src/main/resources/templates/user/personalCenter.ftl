@@ -20,7 +20,7 @@
                     <span class="col-md-5">关注 {{followedNum}}</span>
                     <span class="col-md-4">粉丝 {{followerNum}}</span>
                     <#if Session.user?exists>
-                        <button v-if="id === ${Session.user.id}" class="btn btn-info"
+                        <button v-if="id === ${Session.user.id}" class="btn btn-info" v-on:click="accountEdit"
                                 style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
                             <i class="fa fa-pencil"></i> 编辑
                         </button>
@@ -123,6 +123,9 @@
                 }, function (error) {
                     swal(error.body.msg);
                 });
+            },
+            accountEdit: function () {
+                window.location.href = "/user/accountEdit";
             }
         }
     });
