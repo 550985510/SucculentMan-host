@@ -63,8 +63,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         //未登录状态需要被拦截的请求地址
         registry.addInterceptor(loginInterceptor)
-                //登陆用户是否关注当前用户
-                .addPathPatterns("/api/follow/isFollowed")
                 //用户关注
                 .addPathPatterns("/api/follow/follow")
                 //取消关注
