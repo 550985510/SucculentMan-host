@@ -57,8 +57,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                //需要被拦截的请求地址
-                .addPathPatterns("/api/v1/null");
+                //未登录状态需要被拦截的请求地址
+                //用户关注
+                .addPathPatterns("/api/follow/follow")
+                //取消关注
+                .addPathPatterns("/api/follow/unFollow");
     }
 
     /**

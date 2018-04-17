@@ -1,5 +1,6 @@
 package com.tangdou.succulent.host.interceptor;
 
+import com.tangdou.succulent.host.config.AuthorizationException;
 import com.tangdou.succulent.manager.api.user.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -31,12 +32,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session =request.getSession();
-        boolean isLogin = false;
         User currentUser = (User) session.getAttribute(SESSION_KEY);
         if (currentUser != null) {
-            isLogin = true;
+            return true;
+        } else {
+            throw new AuthorizationException("未登录，禁止访问");
         }
-        return isLogin;
     }
 
 }

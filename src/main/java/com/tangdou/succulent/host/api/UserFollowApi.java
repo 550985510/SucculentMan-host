@@ -1,6 +1,5 @@
 package com.tangdou.succulent.host.api;
 
-import com.tangdou.succulent.host.api.request.RxUserFollow;
 import com.tangdou.succulent.host.common.ResponseCode;
 import com.tangdou.succulent.host.common.ResponseData;
 import com.tangdou.succulent.host.interceptor.LoginInterceptor;
