@@ -8,8 +8,8 @@
 </head>
 <body>
 <#include 'header.ftl'/>
-<div class="container" style=" margin-top:8%;"> 
-   <div class="panel margin-big-top">
+<div class="container" style=" margin-top:8%;">
+    <div class="panel margin-big-top" style="border: solid 1px #ddd;border-radius: 4px;">
       <div class="text-center">
          <br>
          <h4 class="padding-top">
