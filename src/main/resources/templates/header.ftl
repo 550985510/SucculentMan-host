@@ -235,6 +235,7 @@
 
 </div>
 <#include 'include/footer.ftl'/>
+<script src="<@s.url '/js/layer/layer.js'/>"></script>
 <script>
     var headerApp = new Vue({
         el: '#main_header',
@@ -311,11 +312,13 @@
                     if (this.regMobile.retcode != 2000000 && this.regMobile.msg != null) {
                         swal(this.regMobile.msg, "", "error");
                     } else {
+                        var index = layer.load(0, {shade: false});
                         var url = "/api/user/login";
                         this.$http.post(url, this.user).then(function (response) {
                             if (response.data.retcode != 2000000) {
                                 swal(response.data.msg, "", "error");
                             } else {
+                                layer.close(index);
                                 $("#loginModule").modal('hide');
                                 swal({
                                     title: "登陆成功!",

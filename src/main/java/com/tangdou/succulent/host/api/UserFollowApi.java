@@ -57,4 +57,22 @@ public class UserFollowApi {
         userFollowServiceApi.unFollow(currentUser.getId(), followedId);
         return result;
     }
+
+    @GetMapping("/followedNum")
+    @ApiOperation("用户关注人数")
+    public ResponseData followedNum(@RequestParam("userId") Integer userId) {
+        ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
+        ResponseResult responseResult = userFollowServiceApi.findUserFollowedNum(userId);
+        result.setData(responseResult.getData());
+        return result;
+    }
+
+    @GetMapping("/followerNum")
+    @ApiOperation("用户粉丝数量")
+    public ResponseData followerNum(@RequestParam("followedId") Integer followedId) {
+        ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
+        ResponseResult responseResult = userFollowServiceApi.findUserFollowerNum(followedId);
+        result.setData(responseResult.getData());
+        return result;
+    }
 }

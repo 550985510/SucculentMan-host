@@ -17,8 +17,8 @@
                     <img v-bind:src="userInfo.avatar" class="img-circle img-responsive"
                          style="width: 150px; height: 150px; border: 3px solid #f8f8f8">
                     <h3 style="margin: 10px">{{userInfo.nickName}}</h3>
-                    <span class="col-md-5">关注 110</span>
-                    <span class="col-md-4">粉丝 0</span>
+                    <span class="col-md-5">关注 {{followedNum}}</span>
+                    <span class="col-md-4">粉丝 {{followerNum}}</span>
                     <#if Session.user?exists>
                         <button v-if="id === ${Session.user.id}" class="btn btn-info"
                                 style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
@@ -53,11 +53,15 @@
         data: {
             id: ${userId},
             userInfo: {},
-            isFollowedFlag: false
+            isFollowedFlag: false,
+            followedNum: 0,
+            followerNum: 0
         },
         created: function () {
             this.query();
             this.isFollowed();
+            this.findFollowedNum();
+            this.findFollowerNum();
         },
         mounted: function () {
         },
@@ -88,6 +92,8 @@
                 var url = "/api/follow/follow?followedId=" + this.id;
                 this.$http.get(url, this.id).then(function (response) {
                     this.isFollowedFlag = true;
+                    this.findFollowedNum();
+                    this.findFollowerNum();
                 }, function (error) {
                     swal(error.body.msg);
                 });
@@ -96,6 +102,24 @@
                 var url = "/api/follow/unFollow?followedId=" + this.id;
                 this.$http.get(url, this.id).then(function (response) {
                     this.isFollowedFlag = false;
+                    this.findFollowedNum();
+                    this.findFollowerNum();
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            findFollowedNum: function () {
+                var url = "/api/follow/followedNum?userId=" + this.id;
+                this.$http.get(url, this.id).then(function (response) {
+                    this.followedNum = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            findFollowerNum: function () {
+                var url = "/api/follow/followerNum?followedId=" + this.id;
+                this.$http.get(url, this.id).then(function (response) {
+                    this.followerNum = response.data.data;
                 }, function (error) {
                     swal(error.body.msg);
                 });
