@@ -1,6 +1,7 @@
 package com.tangdou.succulent.host.config;
 
 import com.tangdou.succulent.host.interceptor.LoginInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -28,6 +29,9 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+    @Value("${img.location}")
+    private String location;
+
     @Resource
     private LoginInterceptor loginInterceptor;
 
@@ -44,6 +48,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
+                .addResourceLocations("file:" + location)
                 .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
         super.addResourceHandlers(registry);
     }
@@ -63,7 +68,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 //用户关注
                 .addPathPatterns("/api/follow/follow")
                 //取消关注
-                .addPathPatterns("/api/follow/unFollow");
+                .addPathPatterns("/api/follow/unFollow")
+                //文件上传
+                .addPathPatterns("/api/upload/**");
     }
 
     /**

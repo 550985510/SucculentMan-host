@@ -1,3 +1,6 @@
+img:
+  location: C:/tmp/
+
 spring:
   application:
     name: SucculentMan-host
