@@ -14,8 +14,30 @@
         <div class="tray tray-center row">
             <div class="panel col-md-3">
                 <div class="panel-body" align="center">
-                    <img v-bind:src="userInfo.avatar" class="img-circle img-responsive" style="width: 150px; height: 150px; border: 3px solid #f8f8f8">
+                    <img v-bind:src="userInfo.avatar" class="img-circle img-responsive"
+                         style="width: 150px; height: 150px; border: 3px solid #f8f8f8">
                     <h3 style="margin: 10px">{{userInfo.nickName}}</h3>
+                    <span class="col-md-5">关注 110</span>
+                    <span class="col-md-4">粉丝 0</span>
+                    <#if Session.user?exists>
+                        <button v-if="id === ${Session.user.id}" class="btn btn-info"
+                                style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
+                            <i class="fa fa-pencil"></i> 编辑
+                        </button>
+                        <button v-else-if="isFollowedFlag" class="btn btn-success" v-on:click="unFollow"
+                                style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
+                            <i class="fa fa-check"></i> 已关注
+                        </button>
+                        <button v-else="" class="btn btn-success" v-on:click="follow"
+                                style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
+                            <i class="fa fa-plus"></i> 关注
+                        </button>
+                    <#else>
+                        <button class="btn btn-success"  v-on:click="alertLogin"
+                                style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
+                            <i class="fa fa-plus"></i> 关注
+                        </button>
+                    </#if>
                 </div>
             </div>
             <div class="panel col-md-8">
@@ -30,10 +52,12 @@
         el: '#app',
         data: {
             id: ${userId},
-            userInfo: {}
+            userInfo: {},
+            isFollowedFlag: false
         },
         created: function () {
             this.query();
+            this.isFollowed();
         },
         mounted: function () {
         },
@@ -42,7 +66,36 @@
                 var url = "/api/user/findById?id=" + this.id;
                 this.$http.get(url, this.id).then(function (response) {
                     this.userInfo = response.data.data;
-                    console.log(this.userInfo)
+                    if (this.userInfo == null) {
+                        window.location.href = "/error_404";
+                    }
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            alertLogin: function () {
+                swal("请先登录!");
+            },
+            isFollowed: function () {
+                var url = "/api/follow/isFollowed?followedId=" + this.id;
+                this.$http.get(url, this.id).then(function (response) {
+                    this.isFollowedFlag = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            follow: function () {
+                var url = "/api/follow/follow?followedId=" + this.id;
+                this.$http.get(url, this.id).then(function (response) {
+                    this.isFollowedFlag = true;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            unFollow: function () {
+                var url = "/api/follow/unFollow?followedId=" + this.id;
+                this.$http.get(url, this.id).then(function (response) {
+                    this.isFollowedFlag = false;
                 }, function (error) {
                     swal(error.body.msg);
                 });

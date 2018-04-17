@@ -1,6 +1,7 @@
 package com.tangdou.succulent.host.config;
 
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
+import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ public class HessianConfig {
     private String MANAGER_HOST;
 
     /**
-     * 用户相关任务接口
+     * 用户相关接口
      *
      * @return factory
      */
@@ -34,7 +35,7 @@ public class HessianConfig {
     }
 
     /**
-     * 文章相关任务接口
+     * 文章相关接口
      *
      * @return factory
      */
@@ -43,6 +44,19 @@ public class HessianConfig {
         HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
         factory.setServiceUrl(MANAGER_HOST + "/hessian/articleServiceApi");
         factory.setServiceInterface(ArticleServiceApi.class);
+        return factory;
+    }
+
+    /**
+     * 用户关注相关接口
+     *
+     * @return factory
+     */
+    @Bean("userFollowServiceApi")
+    public HessianProxyFactoryBean userFollowServiceApi() {
+        HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
+        factory.setServiceUrl(MANAGER_HOST + "/hessian/userFollowServiceApi");
+        factory.setServiceInterface(UserFollowServiceApi.class);
         return factory;
     }
 
