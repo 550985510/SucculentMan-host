@@ -2,6 +2,8 @@ package com.tangdou.succulent.host.interceptor;
 
 import com.tangdou.succulent.host.config.AuthorizationException;
 import com.tangdou.succulent.manager.api.user.model.User;
+import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -36,7 +38,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (currentUser != null) {
             return true;
         } else {
-            throw new AuthorizationException("未登录，禁止访问");
+            String requestUri = request.getRequestURI();
+            String contextPath = request.getContextPath();
+            String url = requestUri.substring(contextPath.length());
+            String regApi = ".*api.*";
+            if (url.matches(regApi)) {
+                throw new AuthorizationException("未登录，禁止访问");
+            } else {
+                response.sendRedirect("/error_403");
+                return false;
+            }
         }
     }
 
