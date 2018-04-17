@@ -166,7 +166,7 @@
     <footer id="footer" class="footer navbar-fixed-bottom" :style="{'z-index': zIndex}"
             style="background-color: #f5f5f5">
         <div class="container" style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
-            <h5>Copyright © 2011-2018</h5>
+            <h5>Copyright © 2016-2018</h5>
             <h5>豫ICP备17017969号-1 多肉达人信息技术有限责任公司版权所有</h5>
         </div>
     </footer>
