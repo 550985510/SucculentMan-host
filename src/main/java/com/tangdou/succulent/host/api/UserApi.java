@@ -107,9 +107,11 @@ public class UserApi {
         user.setId(info.getId());
         user.setGender(info.getGender());
         user.setAvatar(info.getAvatar());
+        currentUser.setAvatar(info.getAvatar());
         ResponseResult responseResult = userServiceApi.edit(user);
         result.setRetcode(responseResult.getRetcode());
         result.setMessage(responseResult.getMsg());
+        session.setAttribute(LoginInterceptor.SESSION_KEY, user);
         return result;
     }
 }
