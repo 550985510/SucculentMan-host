@@ -6,7 +6,6 @@
     <title>个人中心 </title>
     <link rel="stylesheet" type="text/css" href="<@s.url '/css/theme.css'/>">
     <link rel="stylesheet" type="text/css" href="<@s.url '/plugins/sweetAlert/sweetalert.css'/>">
-    <link href="<@s.url '/css/fileinput.css'/>" rel="stylesheet" type="text/css">
 </head>
 <body>
 <#include '../header.ftl'/>
@@ -28,13 +27,16 @@
                             <div class="section row mbn">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <input type="file" id="input-file" name="myFileName" class="file-loading"/>
+                                        <div style="border: 1px solid #ddd; border-radius: 5px; text-align: center; width: 160px; height: 160px; line-height: 160px">
+                                            <img :src="userInfo.avatar" style="width: 75%; border: 1px dashed #a6a6a6">
+                                        </div>
+                                        <input type="file" id="uploadInput" name="myFileName" style="display:none" v-on:change="uploadImg"/>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
                                     <p style="font-size: 12px; color: #b6b6b6; margin: 5px">作为多肉达人，大家都是“有头有脸”的朋友，上传头像让大家更快认识您。</p>
                                     <p style="font-size: 12px; color: #b6b6b6; margin: 5px">选择喜欢的图片作为您的头像。</p>
-                                    <button class="btn btn-info" style="margin: 5px" v-on:click="uploadBtn"><i class="fa fa-arrow-up"></i> 上传头像</button>
+                                    <button class="btn btn-info" style="margin: 5px;" v-on:click="uploadBtn"><i class="fa fa-arrow-up"></i> 上传头像</button>
                                     <p style="font-size: 12px; color: #b6b6b6; margin: 15px 5px 5px 5px">上传成功后点击保存按钮才会生效喔！</p>
                                 </div>
                             </div>
@@ -104,8 +106,6 @@
     </section>
 </div>
 <#include '../include/footer.ftl'/>
-<script src="<@s.url '/js/fileinput.js'/>"></script>
-<script src="<@s.url '/js/zh.js'/>"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -141,32 +141,12 @@
                 var url = "/api/user/findById?id=" + this.id;
                 this.$http.get(url, this.id).then(function (response) {
                     this.userInfo = response.data.data;
-                    var _self = this;
-                    var imageAvatar = response.data.data.avatar;
-                    this.$nextTick(function () {
-                        $("#input-file").fileinput({
-                            uploadUrl: "/api/upload/img", //上传的地址
-                            overwriteInitial: true,
-                            language: 'zh', //设置语言
-                            showClose: false,
-                            showCaption: false,
-                            showBrowse: false,
-                            browseOnZoneClick: true,
-                            removeLabel: '',
-                            removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-                            removeTitle: 'Cancel or reset changes',
-                            msgErrorClass: 'alert alert-block alert-danger',
-                            defaultPreviewContent: '<img src="' + imageAvatar + '" class="thumb" width="100px">'
-                        }).on("fileuploaded", function (e, result) {
-                            _self.userInfo.avatar = result.response.data;
-                        });
-                    });
                 }, function (error) {
                     swal(error.body.msg);
                 });
             },
             uploadBtn: function () {
-                $("#input-file").click();
+                $("#uploadInput").click();
             },
             saveInfo: function () {
                 if (this.regName.retcode != 2000000 && this.regName.msg != null) {
@@ -206,6 +186,29 @@
                     this.regEmail = response.data;
                 }, function (error) {
                     swal(error.body.msg);
+                });
+            },
+            uploadImg:function (e) {
+                var logoFile = e.target.files[0];
+                var form = new FormData();
+                form.append("myFileName",logoFile);
+                var that = this;
+                $.ajax({
+                    url: "/api/upload/img",
+                    type:"post",
+                    data: form,
+                    processData:false,
+                    contentType:false,
+                    success:function(response){
+                        if(response.retcode !== 2000000){
+                            sweetAlert(response.msg)
+                        } else {
+                            that.userInfo.avatar = response.data;
+                        }
+                    },
+                    error:function(e){
+                        sweetAlert(e.toString());
+                    }
                 });
             }
         }
