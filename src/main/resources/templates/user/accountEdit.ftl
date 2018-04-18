@@ -105,6 +105,7 @@
 </div>
 <#include '../include/footer.ftl'/>
 <script src="<@s.url '/js/fileinput.js'/>"></script>
+<script src="<@s.url '/js/zh.js'/>"></script>
 <script>
     var app = new Vue({
         el: '#app',
