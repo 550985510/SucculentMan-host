@@ -30,7 +30,7 @@ public class ValidateApi {
     @PostMapping("/email")
     @ApiOperation("邮箱校验")
     public ResponseData checkEmail(@RequestParam("email") String email) {
-        String regEmail = "^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+        String regEmail = "^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
         if(!email.matches(regEmail)){
             return new ResponseData(ResponseCode.ERROR_EMAIL_FORMAT);
         }else{
@@ -43,6 +43,17 @@ public class ValidateApi {
     public ResponseData checkNickName(@RequestParam("nickName") String nickName) {
         if(nickName.length() < 2 || nickName.length() > 32) {
             return new ResponseData(ResponseCode.ERROR_NICKNAME_FORMAT);
+        }else{
+            return new ResponseData(ResponseCode.SUCCESS);
+        }
+    }
+
+    @PostMapping("/name")
+    @ApiOperation("姓名校验")
+    public ResponseData checkName(@RequestParam("name") String name) {
+        String regName = "^([\\u4e00-\\u9fa5]{2,10}|[a-zA-Z\\.\\s]{1,20})$";
+        if(!name.matches(regName)) {
+            return new ResponseData(ResponseCode.ERROR_NAME_FORMAT);
         }else{
             return new ResponseData(ResponseCode.SUCCESS);
         }

@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2018/4/12
  */
 @Data
-public class RxUser {
+public class RxUserRegister {
 
     /**
      * 手机号

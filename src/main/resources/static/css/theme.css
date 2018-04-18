@@ -136,6 +136,7 @@ input::-moz-focus-inner {
 }
 input {
   line-height: normal;
+  padding-left: 10px !important;
 }
 input[type="checkbox"],
 input[type="radio"] {

@@ -176,8 +176,7 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                     <h4 class="modal-title">注册</h4>
                 </div>
                 <div class="modal-body">
@@ -211,8 +210,7 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                     <h4 class="modal-title">登陆</h4>
                 </div>
                 <div class="modal-body">
@@ -316,6 +314,7 @@
                         var url = "/api/user/login";
                         this.$http.post(url, this.user).then(function (response) {
                             if (response.data.retcode != 2000000) {
+                                layer.close(index);
                                 swal(response.data.msg, "", "error");
                             } else {
                                 layer.close(index);

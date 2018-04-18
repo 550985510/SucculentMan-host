@@ -15,15 +15,15 @@ public enum ResponseCode {
     ERROR(1000000, "未知错误"),
 
     //登录错误
-    ERROR_USERNAME_NOT_EXIST(1000001, "用户名不存在"),
+    ERROR_USER_NOT_EXIST(1000001, "用户不存在"),
     ERROR_USERNAME_LENGTH_OUT(1000002, "用户名过长"),
     ERROR_USERNAME_EXIST(1000003, "用户名已存在"),
     ERROR_USERNAME_EMPTY(1000004, "用户名空"),
     ERROR_CAPTCHA_NOT_MATCH(1000005, "验证码错误"),
     ERROR_ACCESS_FORBIDDEN(1000006, "未登录,禁止访问"),
-    ERROR_BUSINESS_NOT_EXIST(1000007, "商务不存在"),
+    ERROR_NAME_FORMAT(1000007, "请输入真实姓名"),
     ERROR_NICKNAME_FORMAT(1000008, "请输入2-32位字符作为昵称"),
-    ERROR_NICKNAME_EXIST(1000008, "昵称已存在"),
+    ERROR_NICKNAME_EXIST(1000009, "昵称已存在"),
 
     //注册错误提示
     ERROR_EMAIL_EXIST(1001000, "该邮箱已注册"),

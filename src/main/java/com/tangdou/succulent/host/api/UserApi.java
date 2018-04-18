@@ -1,6 +1,7 @@
 package com.tangdou.succulent.host.api;
 
-import com.tangdou.succulent.host.api.request.RxUser;
+import com.tangdou.succulent.host.api.request.RxUserBaseInfo;
+import com.tangdou.succulent.host.api.request.RxUserRegister;
 import com.tangdou.succulent.host.common.ResponseCode;
 import com.tangdou.succulent.host.common.ResponseData;
 import com.tangdou.succulent.host.interceptor.LoginInterceptor;
@@ -25,26 +26,28 @@ import javax.servlet.http.HttpSession;
 @Api(description = "用户相关接口")
 public class UserApi {
 
+    private User currentUser = new User();
+
     @Resource
     private UserServiceApi userServiceApi;
 
     /**
      * 用户注册
-     * @param rxUser 注册信息
+     * @param rxUserRegister 注册信息
      * @param session session
      * @return 操作状态
      */
     @PostMapping("/register")
     @ApiOperation("用户注册")
-    public ResponseData register(@RequestBody RxUser rxUser, HttpSession session) {
+    public ResponseData register(@RequestBody RxUserRegister rxUserRegister, HttpSession session) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
-        ResponseResult responseResult = userServiceApi.register(rxUser.getMobile(), rxUser.getPassWord(), rxUser.getNickName());
+        ResponseResult responseResult = userServiceApi.register(rxUserRegister.getMobile(), rxUserRegister.getPassWord(), rxUserRegister.getNickName());
         if (RestResultEnum.SUCCESS.getKey() != responseResult.getRetcode()) {
             result.setRetcode(responseResult.getRetcode());
             result.setMessage(responseResult.getMsg());
         } else {
             //注册成功后自动登陆
-            User user = (User) userServiceApi.login(rxUser.getMobile(), rxUser.getPassWord()).getData();
+            User user = (User) userServiceApi.login(rxUserRegister.getMobile(), rxUserRegister.getPassWord()).getData();
             session.setAttribute(LoginInterceptor.SESSION_KEY, user);
         }
         return result;
@@ -52,15 +55,15 @@ public class UserApi {
 
     /**
      * 用户登陆
-     * @param rxUser 注册信息
+     * @param rxUserRegister 注册信息
      * @param session session
      * @return 操作状态
      */
     @PostMapping("/login")
     @ApiOperation("用户登陆")
-    public ResponseData login(@RequestBody RxUser rxUser, HttpSession session) {
+    public ResponseData login(@RequestBody RxUserRegister rxUserRegister, HttpSession session) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
-        ResponseResult responseResult = userServiceApi.login(rxUser.getMobile(), rxUser.getPassWord());
+        ResponseResult responseResult = userServiceApi.login(rxUserRegister.getMobile(), rxUserRegister.getPassWord());
         if (RestResultEnum.SUCCESS.getKey() != responseResult.getRetcode()) {
             result.setRetcode(responseResult.getRetcode());
             result.setMessage(responseResult.getMsg());
@@ -83,6 +86,30 @@ public class UserApi {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
         ResponseResult responseResult = userServiceApi.findById(id);
         result.setData(responseResult.getData());
+        return result;
+    }
+
+    @PostMapping("/edit/baseInfo")
+    @ApiOperation("修改基本信息")
+    public ResponseData editBaseInfo(@RequestBody RxUserBaseInfo info, HttpSession session) {
+        ResponseData result = new ResponseData();
+        currentUser = (User) session.getAttribute(LoginInterceptor.SESSION_KEY);
+        if (!currentUser.getId().equals(info.getId())) {
+            return new ResponseData(ResponseCode.ERROR_USER_NOT_EXIST);
+        }
+        User user = new User();
+        if (info.getName() != null) {
+            user.setName(info.getName());
+        }
+        if (info.getEmail() != null) {
+            user.setEmail(info.getEmail());
+        }
+        user.setId(info.getId());
+        user.setGender(info.getGender());
+        user.setAvatar(info.getAvatar());
+        ResponseResult responseResult = userServiceApi.edit(user);
+        result.setRetcode(responseResult.getRetcode());
+        result.setMessage(responseResult.getMsg());
         return result;
     }
 }

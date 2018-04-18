@@ -69,8 +69,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/api/follow/unFollow")
                 //文件上传
                 .addPathPatterns("/api/upload/**")
-                //修改个人资料
-                .addPathPatterns("/user/accountEdit");
+                //修改个人资料页面接口
+                .addPathPatterns("/user/accountEdit")
+                //修改个人资料数据接口
+                .addPathPatterns("/api/user/edit/**");
     }
 
     /**
