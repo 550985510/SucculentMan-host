@@ -97,7 +97,37 @@
                     </div>
                     <div id="editPassWord" class="tab-pane fade">
                         <div class="panel-body" style="border-top: 0">
-
+                            <div class="row" style="margin: 10px">
+                                <div class="col-md-2">
+                                    <label class="form-control" style="text-align: right; line-height: 39px; border: 0">原 密 码：</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" v-model="passWordInfo.passWord" style="width: 40%">
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 10px">
+                                <div class="col-md-2">
+                                    <label class="form-control" style="text-align: right; line-height: 39px; border: 0">新 密 码：</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" v-model="passWordInfo.newPassWord" style="width: 40%">
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 10px">
+                                <div class="col-md-2">
+                                    <label class="form-control" style="text-align: right; line-height: 39px; border: 0">确认新密码：</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" v-model="passWordInfo.newPassWord2" style="width: 40%">
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 10px">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-9">
+                                    <button class="btn btn-info" v-on:click="passWordEdit"><i class="fa fa-pencil"></i> 修改密码</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +143,10 @@
             id: ${Session.user.id},
             userInfo: {},
             regName: {},
-            regEmail: {}
+            regEmail: {},
+            passWordInfo: {
+                id: ${Session.user.id}
+            }
         },
         created: function () {
             this.query();
@@ -188,7 +221,7 @@
                     swal(error.body.msg);
                 });
             },
-            uploadImg:function (e) {
+            uploadImg: function (e) {
                 var logoFile = e.target.files[0];
                 var form = new FormData();
                 form.append("myFileName",logoFile);
@@ -210,6 +243,32 @@
                         sweetAlert(e.toString());
                     }
                 });
+            },
+            passWordEdit: function () {
+                if (this.passWordInfo.passWord == null) {
+                    swal("原密码不能为空!", "", "error");
+                } else if(this.passWordInfo.newPassWord == null) {
+                    swal("新密码不能为空!", "", "error");
+                } else if(this.passWordInfo.newPassWord != this.passWordInfo.newPassWord2) {
+                    swal("两次密码输入不一致!", "", "error")
+                } else {
+                    var url = "/api/user/edit/passWord";
+                    this.$http.post(url, this.passWordInfo).then(function (response) {
+                        if (response.data.retcode != 2000000) {
+                            swal(response.data.msg, "", "error");
+                        } else {
+                            swal({
+                                title: "修改成功，请重新登录",
+                                text: "",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        }
+                    }, function (error) {
+                        swal(error.body.msg);
+                    });
+                }
             }
         }
     });

@@ -1,6 +1,7 @@
 package com.tangdou.succulent.host.api;
 
 import com.tangdou.succulent.host.api.request.RxUserBaseInfo;
+import com.tangdou.succulent.host.api.request.RxUserPassWord;
 import com.tangdou.succulent.host.api.request.RxUserRegister;
 import com.tangdou.succulent.host.common.ResponseCode;
 import com.tangdou.succulent.host.common.ResponseData;
@@ -112,6 +113,21 @@ public class UserApi {
         result.setRetcode(responseResult.getRetcode());
         result.setMessage(responseResult.getMsg());
         session.setAttribute(LoginInterceptor.SESSION_KEY, user);
+        return result;
+    }
+
+    @PostMapping("/edit/passWord")
+    @ApiOperation("修改密码")
+    public ResponseData editPassWord(@RequestBody RxUserPassWord info, HttpSession session) {
+        ResponseData result = new ResponseData();
+        currentUser = (User) session.getAttribute(LoginInterceptor.SESSION_KEY);
+        if (!currentUser.getId().equals(info.getId())) {
+            return new ResponseData(ResponseCode.ERROR_USER_NOT_EXIST);
+        }
+        ResponseResult responseResult = userServiceApi.editPassWord(info.getId(), info.getPassWord(), info.getNewPassWord());
+        result.setRetcode(responseResult.getRetcode());
+        result.setMessage(responseResult.getMsg());
+        session.removeAttribute(LoginInterceptor.SESSION_KEY);
         return result;
     }
 }

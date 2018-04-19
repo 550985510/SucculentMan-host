@@ -28,9 +28,15 @@ import java.util.UUID;
 @Api(description = "文件上传相关接口")
 public class UploadApi {
 
+    /**
+     * 静态资源映射本地地址
+     */
     @Value("${img.location}")
     private String location;
 
+    /**
+     * 服务器地址
+     */
     @Value("${app.manager.host}")
     private String APP_PATH;
 
@@ -42,7 +48,9 @@ public class UploadApi {
         if (!dir.exists()) {
             dir.mkdirs();
         }
+        //新的图片
         File save = new File(dir,fileName);
+        //把内存图片写入磁盘中
         file.transferTo(save);
         result.setData(APP_PATH + "/" + fileName);
         return result;
