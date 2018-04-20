@@ -11,14 +11,16 @@
 <#include '../header.ftl'/>
 <div id="app" class="main">
     <section id="content" class="table-layout">
-        <div class="tray tray-center row">
-            <div class="panel col-md-3">
-                <div class="panel-body" align="center">
-                    <img v-bind:src="userInfo.avatar" class="img-circle img-responsive"
-                         style="width: 150px; height: 150px; border: 3px solid #f8f8f8">
-                    <h3 style="margin: 10px">{{userInfo.nickName}}</h3>
-                    <span class="col-md-5">关注 {{followedNum}}</span>
-                    <span class="col-md-4">粉丝 {{followerNum}}</span>
+        <div class="tray tray-center">
+            <div class="row">
+                <div class="panel col-md-3">
+                    <div v-if="userInfo.background != null" class="panel-body" align="center" v-bind:style="{ backgroundImage: 'url(' + userInfo.background + ')'}"
+                         style="height:270px;  background-size: 100% 50%; background-repeat: no-repeat">
+                        <img v-bind:src="userInfo.avatar" class="img-circle"
+                             style="width: 150px; height: 150px; border: 5px solid rgba(250,250,250,0.6)">
+                        <h3 style="margin: 10px">{{userInfo.nickName}}</h3>
+                        <span class="col-md-5">关注 {{followedNum}}</span>
+                        <span class="col-md-4">粉丝 {{followerNum}}</span>
                     <#if Session.user?exists>
                         <button v-if="id === ${Session.user.id}" class="btn btn-info" v-on:click="accountEdit"
                                 style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
@@ -33,14 +35,23 @@
                             <i class="fa fa-plus"></i> 关注
                         </button>
                     <#else>
-                        <button class="btn btn-success"  v-on:click="alertLogin"
+                        <button class="btn btn-success" v-on:click="alertLogin"
                                 style="margin: 10px; width: 45%; height: 30px; line-height: 10px; border-radius: 5px">
                             <i class="fa fa-plus"></i> 关注
                         </button>
                     </#if>
+                    </div>
+                </div>
+                <div class="panel col-md-8">
+                    <div class="panel-body" v-on:mouseenter="showEditBtn" v-on:mouseleave="hideEditBtn" align="center"
+                         style="width:100%; height:270px; background-size: 100% 100%; background-repeat: no-repeat;"
+                         v-bind:style="{ backgroundImage: 'url(' + userInfo.background + ')'}" v-if="userInfo.background != null">
+                        <button v-if="showBtn && !showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: #fff" v-on:click="editBackGround">修改封面</button>
+                        <button v-if="showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: white" v-on:click="saveBackGround">保存封面</button>
+                    </div>
                 </div>
             </div>
-            <div class="panel col-md-8">
+            <div class="panel">
                 <div class="panel-body">
                     <ul id="myTab" class="nav nav-tabs">
                         <li class="active">
@@ -53,7 +64,8 @@
                     <div id="myTabContent" class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <div class="panel-body" style="border-top: 0">
-                                <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+                                <p>
+                                    菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
                             </div>
                         </div>
                         <div id="ios" class="tab-pane fade">
@@ -78,7 +90,9 @@
             userInfo: {},
             isFollowedFlag: false,
             followedNum: 0,
-            followerNum: 0
+            followerNum: 0,
+            showBtn: false,
+            showSaveBtn: false
         },
         created: function () {
             this.query();
@@ -149,6 +163,20 @@
             },
             accountEdit: function () {
                 window.location.href = "/user/accountEdit";
+            },
+            showEditBtn: function () {
+                this.showBtn = true;
+            },
+            hideEditBtn: function () {
+                this.showBtn = false;
+            },
+            editBackGround: function () {
+                this.showBtn = false;
+                this.showSaveBtn = true;
+            },
+            saveBackGround: function () {
+                this.showBtn = true;
+                this.showSaveBtn = false;
             }
         }
     });
