@@ -16,7 +16,7 @@
                 <div class="slider" id="slider">
                     <ul class="slider-wrapper">
                         <li class="item" data-title="这位上神！速速到我的本子里来">
-                            <a href="#" class="pic"><img src="img/cont/slider_img1.jpg" alt="#"></a>
+                            <a href="#" class="pic"><img src="http://manager.tangdoudou.club/manager/user_default_background.jpg" alt="#"></a>
                         </li>
                         <li class="item" data-title="想换上新衣去旅行！" data-author="by 占秋">
                             <a href="#" class="pic"><img src="img/cont/slider_img2.jpg" alt="#"></a>
