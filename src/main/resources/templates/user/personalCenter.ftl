@@ -48,6 +48,7 @@
                          v-bind:style="{ backgroundImage: 'url(' + userInfo.background + ')'}" v-if="userInfo.background != null">
                         <#if Session.user?exists>
                             <div v-if="id === ${Session.user.id}">
+                                <input type="file" id="uploadInput" name="myFileName" style="display:none" v-on:change="uploadImg"/>
                                 <button v-if="showBtn && !showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: #fff" v-on:click="editBackGround">修改封面</button>
                                 <button v-if="showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: white" v-on:click="saveBackGround">保存封面</button>
                             </div>
@@ -177,10 +178,50 @@
             editBackGround: function () {
                 this.showBtn = false;
                 this.showSaveBtn = true;
+                $("#uploadInput").click();
             },
             saveBackGround: function () {
-                this.showBtn = true;
-                this.showSaveBtn = false;
+                var that = this;
+                var url = "/api/user/edit/background";
+                this.$http.post(url, this.userInfo).then(function (response) {
+                    if (response.data.retcode != 2000000) {
+                        swal(response.data.msg, "", "error");
+                    } else {
+                        swal({
+                            title: "修改成功!",
+                            text: "",
+                            type: "success"
+                        }, function () {
+                            that.showBtn = true;
+                            that.showSaveBtn = false;
+                        });
+                    }
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            uploadImg: function (e) {
+                var logoFile = e.target.files[0];
+                var form = new FormData();
+                form.append("myFileName",logoFile);
+                var that = this;
+                $.ajax({
+                    url: "/api/upload/img",
+                    type:"post",
+                    data: form,
+                    processData:false,
+                    contentType:false,
+                    success:function(response){
+                        if(response.retcode !== 2000000){
+                            sweetAlert(response.msg)
+                        } else {
+                            that.userInfo.background = response.data;
+                        }
+                    },
+                    error:function(e){
+                        sweetAlert(e.toString());
+                    }
+                });
             }
         }
     });

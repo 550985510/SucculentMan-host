@@ -1,5 +1,6 @@
 package com.tangdou.succulent.host.api;
 
+import com.tangdou.succulent.host.api.request.RxUserBackground;
 import com.tangdou.succulent.host.api.request.RxUserBaseInfo;
 import com.tangdou.succulent.host.api.request.RxUserPassWord;
 import com.tangdou.succulent.host.api.request.RxUserRegister;
@@ -128,6 +129,23 @@ public class UserApi {
         result.setRetcode(responseResult.getRetcode());
         result.setMessage(responseResult.getMsg());
         session.removeAttribute(LoginInterceptor.SESSION_KEY);
+        return result;
+    }
+
+    @PostMapping("/edit/background")
+    @ApiOperation("修改封面图")
+    public ResponseData editBackground(@RequestBody RxUserBackground info, HttpSession session) {
+        ResponseData result = new ResponseData();
+        currentUser = (User) session.getAttribute(LoginInterceptor.SESSION_KEY);
+        if (!currentUser.getId().equals(info.getId())) {
+            return new ResponseData(ResponseCode.ERROR_USER_NOT_EXIST);
+        }
+        User user = new User();
+        user.setId(info.getId());
+        user.setBackground(info.getBackground());
+        ResponseResult responseResult = userServiceApi.edit(user);
+        result.setRetcode(responseResult.getRetcode());
+        result.setMessage(responseResult.getMsg());
         return result;
     }
 }
