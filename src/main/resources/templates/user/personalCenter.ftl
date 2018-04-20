@@ -46,8 +46,12 @@
                     <div class="panel-body" v-on:mouseenter="showEditBtn" v-on:mouseleave="hideEditBtn" align="center"
                          style="width:100%; height:270px; background-size: 100% 100%; background-repeat: no-repeat;"
                          v-bind:style="{ backgroundImage: 'url(' + userInfo.background + ')'}" v-if="userInfo.background != null">
-                        <button v-if="showBtn && !showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: #fff" v-on:click="editBackGround">修改封面</button>
-                        <button v-if="showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: white" v-on:click="saveBackGround">保存封面</button>
+                        <#if Session.user?exists>
+                            <div v-if="id === ${Session.user.id}">
+                                <button v-if="showBtn && !showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: #fff" v-on:click="editBackGround">修改封面</button>
+                                <button v-if="showSaveBtn" class="btn btn-default" style="float: right; background: rgba(75,75,75,0.4); color: white" v-on:click="saveBackGround">保存封面</button>
+                            </div>
+                        </#if>
                     </div>
                 </div>
             </div>
