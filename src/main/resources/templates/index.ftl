@@ -6,6 +6,23 @@
     <title>多肉达人一站式服务品牌</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .carousel-title {
+            left: 7% !important;
+            width: 600px;
+            border-radius: 5px;
+            height: 64px;
+            position: absolute;
+            line-height: 12px;
+            color: #fff;
+            font-size: 28px;
+            padding-left: 17px;
+            background-color: rgba(0, 0, 0, 0.65);
+        }
+    </style>
 </head>
 <body>
 <#include 'header.ftl'/>
@@ -13,37 +30,52 @@
     <div class="main">
         <div class="main-inner body-width">
             <div class="banner clearfix">
-                <div class="slider" id="slider">
-                    <ul class="slider-wrapper">
-                        <li class="item" data-title="这位上神！速速到我的本子里来">
-                            <a href="#" class="pic"><img src="http://manager.tangdoudou.club/manager/user_default_background.jpg" alt="#"></a>
-                        </li>
-                        <li class="item" data-title="想换上新衣去旅行！" data-author="by 占秋">
-                            <a href="#" class="pic"><img src="img/cont/slider_img2.jpg" alt="#"></a>
-                        </li>
-                        <li class="item" data-title="你的书写工具需要一个庇护所" data-author="by Moollly">
-                            <a href="#" class="pic"><img src="img/cont/slider_img3.jpg" alt="#"></a>
-                        </li>
-                        <li class="item" data-title="气温起伏，一件外套保护你" data-author="by 郑南音">
-                            <a href="#" class="pic"><img src="img/cont/slider_img4.jpg" alt="#"></a>
-                        </li>
-                        <li class="item" data-title="鲜为人知的泰国小众小城——董里">
-                            <a href="#" class="pic"><img src="img/cont/slider_img5.jpg" alt="#"></a>
-                        </li>
-                    </ul>
-                    <a href="javascript:;" class="slider-prev"></a>
-                    <a href="javascript:;" class="slider-next"></a>
-                    <div class="slider-title">
-                        <h2></h2>
-                        <span></span>
+                <div id="Carousel" data-ride="carousel" class="carousel slide carousel-fade"
+                     style="width: 712px; height: 445px; float: left">
+                    <!-- 圆点 -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#Carousel" data-slide-to="1"></li>
+                        <li data-target="#Carousel" data-slide-to="2"></li>
+                        <li data-target="#Carousel" data-slide-to="3"></li>
+                        <li data-target="#Carousel" data-slide-to="4"></li>
+                    </ol>
+                    <!-- 图片 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="#"><img class="img-responsive" :src="bannerArticles[0].img" alt=""
+                                             style="width: 712px; height: 445px"></a>
+                            <div class="carousel-caption carousel-title">{{bannerArticles[0].title}}</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="img-responsive" :src="bannerArticles[1].img" alt=""
+                                             style="width: 712px; height: 445px"></a>
+                            <div class="carousel-caption carousel-title">{{bannerArticles[1].title}}</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="img-responsive" :src="bannerArticles[2].img" alt=""
+                                             style="width: 712px; height: 445px"></a>
+                            <div class="carousel-caption carousel-title">{{bannerArticles[2].title}}</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="img-responsive" :src="bannerArticles[3].img" alt=""
+                                             style="width: 712px; height: 445px"></a>
+                            <div class="carousel-caption carousel-title">{{bannerArticles[3].title}}</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="img-responsive" :src="bannerArticles[4].img" alt=""
+                                             style="width: 712px; height: 445px"></a>
+                            <div class="carousel-caption carousel-title">{{bannerArticles[4].title}}</div>
+                        </div>
                     </div>
-                    <div class="slider-btns">
-                        <span class="item"></span>
-                        <span class="item"></span>
-                        <span class="item"></span>
-                        <span class="item"></span>
-                        <span class="item"></span>
-                    </div>
+                    <a href="#Carousel" class="left carousel-control" data-slide="prev">
+                        <!-- 箭头图片 -->
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a href="#Carousel" class="right carousel-control" data-slide="next">
+                        <!-- 箭头图片 -->
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
                 </div>
                 <div class="banner-info">
                     <div class="news body-border">
@@ -397,9 +429,9 @@
                         </a>
                         <div class="waterfall-hover">
                             <span class="mask"></span>
+                            <a href="#" class="btn-white btn-comment"></a>
                             <a href="#" class="btn-collect">收集 45</a>
                             <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
                         </div>
                         <div class="waterfall-info">
                             <p class="title">Fendi（芬迪） 2017早春度假系列</p>
@@ -557,5 +589,42 @@
         <a href="#" id="readMore">浏览更多 ></a>
     </div>
 </div>
+<#include 'include/footer.ftl'/>
+<script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            bannerInfo: {
+                bannerStatus: 1,
+                page: 1,
+                pageSize: 5
+            },
+            bannerArticles: []
+        },
+        created: function () {
+            this.query();
+        },
+        watch: {},
+        methods: {
+            query: function () {
+                var url = "/api/article/list";
+                this.$http.post(url, this.bannerInfo).then(function (response) {
+                    this.bannerArticles = response.data.data.list;
+//                    $.each(this.bannerArticles,function(index,item){
+//                       var silderLi = $("<li></li>").addClass("item").attr("data-title", item.title);
+//                       var silderA = $("<a href='#'></a>").addClass("pic");
+//                       var silderImg = $("<img alt='#'>").attr("src", item.img);
+//                       silderA.append(silderImg);
+//                       silderLi.append(silderA);
+//                       $("#silder_ul").append(silderLi);
+//                    });
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            }
+        }
+    });
+</script>
 </body>
 </html>
