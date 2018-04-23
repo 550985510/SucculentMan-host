@@ -611,14 +611,6 @@
                 var url = "/api/article/list";
                 this.$http.post(url, this.bannerInfo).then(function (response) {
                     this.bannerArticles = response.data.data.list;
-//                    $.each(this.bannerArticles,function(index,item){
-//                       var silderLi = $("<li></li>").addClass("item").attr("data-title", item.title);
-//                       var silderA = $("<a href='#'></a>").addClass("pic");
-//                       var silderImg = $("<img alt='#'>").attr("src", item.img);
-//                       silderA.append(silderImg);
-//                       silderLi.append(silderA);
-//                       $("#silder_ul").append(silderLi);
-//                    });
                 }, function (error) {
                     swal(error.body.msg);
                 });
