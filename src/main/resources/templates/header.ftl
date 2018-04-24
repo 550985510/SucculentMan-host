@@ -279,11 +279,14 @@
                         if (this.regNickName.retcode != 2000000 && this.regNickName.msg != null) {
                             swal(this.regNickName.msg, "", "error");
                         } else {
+                            var index = layer.load(0, {shade: false});
                             var url = "/api/user/register";
                             this.$http.post(url, this.user).then(function (response) {
                                 if (response.data.retcode != 2000000) {
+                                    layer.close(index);
                                     swal(response.data.msg, "", "error");
                                 } else {
+                                    layer.close(index);
                                     $("#registerModule").modal('hide');
                                     swal({
                                         title: "注册成功!",
