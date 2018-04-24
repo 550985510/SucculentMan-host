@@ -18,6 +18,12 @@
             font-size: 28px;
             background-color: rgba(0, 0, 0, 0.65);
         }
+        a:link, a:visited{
+            color: #666 !important;
+        }
+        a:hover {
+            color: #f14382 !important;
+        }
     </style>
 </head>
 <body>
@@ -78,73 +84,97 @@
                         <ul>
                             <li class="title">社区热点</li>
                             <li class="link">
-                                <a href="#">冬天</a>
+                                <a href="#">玉露</a>
                                 <span></span>
-                                <a href="#">把生活过成一首诗</a>
+                                <a href="#">桃美人</a>
                                 <span></span>
-                                <a href="#">早餐</a>
+                                <a href="#">熊童子</a>
                                 <span></span>
-                                <a href="#">记下时间走过的路</a>
+                                <a href="#">山地玫瑰</a>
                                 <span></span>
-                                <a href="#">穿搭</a>
+                                <a href="#">韩国多肉</a>
                                 <span></span>
-                                <a href="#">家居</a>
+                                <a href="#">养护技巧</a>
                                 <span></span>
-                                <a href="#">原创</a>
+                                <a href="#">度夏秘籍</a>
+                                <span></span>
+                            </li>
+
+                            <li class="title">文章分类</li>
+                            <li class="link">
+                                <a href="#">国内资讯</a>
+                                <span></span>
+                                <a href="#">国外咨询</a>
+                                <span></span>
+                                <a href="#">萌肉赏析</a>
+                                <span></span>
+                                <a href="#">创意工坊</a>
+                                <span></span>
+                                <a href="#">多肉养护</a>
+                            <#--<span></span>-->
+                            </li>
+
+                            <li class="title">论坛板块</li>
+                            <li class="link">
+                                <a href="#">问答社区</a>
+                                <span></span>
+                                <a href="#">达人日志</a>
+                                <span></span>
+                                <a href="#">美图分享</a>
                                 <span></span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="main-cont main-album">
-                <div class="main-cont__title">
-                    <h3>专辑精选</h3>
-                    <a href="#" class="more">往期回顾 ></a>
-                </div>
-                <ul class="main-cont__list clearfix">
-                    <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img1.jpg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="title">你的书写工具需要一个庇护所</a>
-                            <p>68张图片 · 2255人收藏</p>
-                            <p>by <a href="#" class="author">Moollly</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img2.jpg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="title">你的书写工具需要一个庇护所</a>
-                            <p>68张图片 · 2255人收藏</p>
-                            <p>by <a href="#" class="author">Moollly</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img3.jpg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="title">你的书写工具需要一个庇护所</a>
-                            <p>68张图片 · 2255人收藏</p>
-                            <p>by <a href="#" class="author">Moollly</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img4.jpg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="title">你的书写工具需要一个庇护所</a>
-                            <p>68张图片 · 2255人收藏</p>
-                            <p>by <a href="#" class="author">Moollly</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img5.jpg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="title">你的书写工具需要一个庇护所</a>
-                            <p>68张图片 · 2255人收藏</p>
-                            <p>by <a href="#" class="author">Moollly</a></p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <#--<div class="main-cont main-album">-->
+                <#--<div class="main-cont__title">-->
+                    <#--<h3>专辑精选</h3>-->
+                    <#--<a href="#" class="more">往期回顾 ></a>-->
+                <#--</div>-->
+                <#--<ul class="main-cont__list clearfix">-->
+                    <#--<li class="item">-->
+                        <#--<a href="#" class="pic"><img src="img/cont/main_img1.jpg" alt="#"></a>-->
+                        <#--<div class="info">-->
+                            <#--<a href="#" class="title">你的书写工具需要一个庇护所</a>-->
+                            <#--<p>68张图片 · 2255人收藏</p>-->
+                            <#--<p>by <a href="#" class="author">Moollly</a></p>-->
+                        <#--</div>-->
+                    <#--</li>-->
+                    <#--<li class="item">-->
+                        <#--<a href="#" class="pic"><img src="img/cont/main_img2.jpg" alt="#"></a>-->
+                        <#--<div class="info">-->
+                            <#--<a href="#" class="title">你的书写工具需要一个庇护所</a>-->
+                            <#--<p>68张图片 · 2255人收藏</p>-->
+                            <#--<p>by <a href="#" class="author">Moollly</a></p>-->
+                        <#--</div>-->
+                    <#--</li>-->
+                    <#--<li class="item">-->
+                        <#--<a href="#" class="pic"><img src="img/cont/main_img3.jpg" alt="#"></a>-->
+                        <#--<div class="info">-->
+                            <#--<a href="#" class="title">你的书写工具需要一个庇护所</a>-->
+                            <#--<p>68张图片 · 2255人收藏</p>-->
+                            <#--<p>by <a href="#" class="author">Moollly</a></p>-->
+                        <#--</div>-->
+                    <#--</li>-->
+                    <#--<li class="item">-->
+                        <#--<a href="#" class="pic"><img src="img/cont/main_img4.jpg" alt="#"></a>-->
+                        <#--<div class="info">-->
+                            <#--<a href="#" class="title">你的书写工具需要一个庇护所</a>-->
+                            <#--<p>68张图片 · 2255人收藏</p>-->
+                            <#--<p>by <a href="#" class="author">Moollly</a></p>-->
+                        <#--</div>-->
+                    <#--</li>-->
+                    <#--<li class="item">-->
+                        <#--<a href="#" class="pic"><img src="img/cont/main_img5.jpg" alt="#"></a>-->
+                        <#--<div class="info">-->
+                            <#--<a href="#" class="title">你的书写工具需要一个庇护所</a>-->
+                            <#--<p>68张图片 · 2255人收藏</p>-->
+                            <#--<p>by <a href="#" class="author">Moollly</a></p>-->
+                        <#--</div>-->
+                    <#--</li>-->
+                <#--</ul>-->
+            <#--</div>-->
             <div class="main-cont main-recommend">
                 <div class="main-cont__title">
                     <h3>单品推荐</h3>
