@@ -6,20 +6,16 @@
     <title>多肉达人一站式服务品牌</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         .carousel-title {
+            padding: 0px !important;
             left: 7% !important;
             width: 600px;
             border-radius: 5px;
             height: 64px;
             position: absolute;
-            line-height: 12px;
             color: #fff;
             font-size: 28px;
-            padding-left: 17px;
             background-color: rgba(0, 0, 0, 0.65);
         }
     </style>
@@ -33,7 +29,7 @@
                 <div id="Carousel" data-ride="carousel" class="carousel slide carousel-fade"
                      style="width: 712px; height: 445px; float: left">
                     <!-- 圆点 -->
-                    <ol class="carousel-indicators">
+                    <ol class="carousel-indicators" style="margin-bottom: 3px">
                         <li data-target="#Carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#Carousel" data-slide-to="1"></li>
                         <li data-target="#Carousel" data-slide-to="2"></li>
@@ -78,7 +74,7 @@
                     </a>
                 </div>
                 <div class="banner-info">
-                    <div class="news body-border">
+                    <div class="news body-border" style="height: 445px">
                         <ul>
                             <li class="title">社区热点</li>
                             <li class="link">
@@ -97,16 +93,8 @@
                                 <a href="#">原创</a>
                                 <span></span>
                             </li>
-                            <li class="choose">
-                                <a href="#">『人气连衣裙精选』 大合集</a>
-                                <span class="icon-text__pink">精选</span>
-                            </li>
-                            <li class="assistant">
-                                <p>收图小助手: <a href="#">tang收集工具</a></p>
-                            </li>
                         </ul>
                     </div>
-                    <div class="app body-border"><a href="#"></a></div>
                 </div>
             </div>
             <div class="main-cont main-album">
