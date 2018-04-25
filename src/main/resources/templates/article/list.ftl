@@ -34,15 +34,9 @@
             <div class="main-cont main-waterfall" v-if="articles.length != 0">
                 <ul class="main-cont__list clearfix waterfall">
                     <li class="item waterfallItem" v-for="item in articles" style="float: left">
-                        <a href="#" class="pic">
-                            <img :src="item.img" alt="#">
+                        <a :href="'/article/content?articleId=' + item.id" class="pic">
+                            <img :src="item.img">
                         </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收藏 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
                         <div class="waterfall-info">
                             <p class="title">{{item.title}}</p>
                             <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>

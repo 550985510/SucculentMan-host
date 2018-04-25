@@ -7,10 +7,7 @@ import com.tangdou.succulent.manager.api.article.Article;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -33,6 +30,15 @@ public class ArticleApi {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
         PageInfo<Article> pageInfo = articleServiceApi.list(article);
         result.setData(pageInfo);
+        return result;
+    }
+
+    @PostMapping("/detail")
+    @ApiOperation("文章详情")
+    public ResponseData detail(@RequestParam("articleId") Integer articleId) {
+        ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
+        Article article = articleServiceApi.detail(articleId).getData();
+        result.setData(article);
         return result;
     }
 }
