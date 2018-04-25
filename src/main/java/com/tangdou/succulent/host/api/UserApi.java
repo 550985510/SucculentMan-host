@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 用户相关接口
@@ -146,6 +147,15 @@ public class UserApi {
         ResponseResult responseResult = userServiceApi.edit(user);
         result.setRetcode(responseResult.getRetcode());
         result.setMessage(responseResult.getMsg());
+        return result;
+    }
+
+    @PostMapping("show")
+    @ApiOperation("首页随机推荐达人")
+    public ResponseData showUser() {
+        ResponseData result = new ResponseData();
+        List<User> list = userServiceApi.showUsers().getData();
+        result.setData(list);
         return result;
     }
 }

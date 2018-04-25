@@ -18,11 +18,27 @@
             font-size: 28px;
             background-color: rgba(0, 0, 0, 0.65);
         }
-        a:link, a:visited{
+        a.ex:link, a.ex:visited{
             color: #666 !important;
         }
-        a:hover {
+        a.ex:hover {
             color: #f14382 !important;
+        }
+        /*瀑布流层*/
+        .waterfall{
+            -moz-column-count:4; /* Firefox */
+            -webkit-column-count:4; /* Safari 和 Chrome */
+            column-count:5;
+            -moz-column-gap: 1em;
+            -webkit-column-gap: 1em;
+            column-gap: 1em;
+        }
+        /*一个内容层*/
+        .waterfallItem{
+            margin: 0 0 1em 0;
+            -moz-page-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            break-inside: avoid;
         }
     </style>
 </head>
@@ -43,7 +59,7 @@
                         <li data-target="#Carousel" data-slide-to="4"></li>
                     </ol>
                     <!-- 图片 -->
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" v-if="bannerArticles.length != 0">
                         <div class="item active">
                             <a href="#"><img class="img-responsive" :src="bannerArticles[0].img" alt=""
                                              style="width: 712px; height: 445px"></a>
@@ -84,43 +100,43 @@
                         <ul>
                             <li class="title">社区热点</li>
                             <li class="link">
-                                <a href="#">玉露</a>
+                                <a href="#" class="ex">玉露</a>
                                 <span></span>
-                                <a href="#">桃美人</a>
+                                <a href="#" class="ex">桃美人</a>
                                 <span></span>
-                                <a href="#">熊童子</a>
+                                <a href="#" class="ex">熊童子</a>
                                 <span></span>
-                                <a href="#">山地玫瑰</a>
+                                <a href="#" class="ex">山地玫瑰</a>
                                 <span></span>
-                                <a href="#">韩国多肉</a>
+                                <a href="#" class="ex">韩国多肉</a>
                                 <span></span>
-                                <a href="#">养护技巧</a>
+                                <a href="#" class="ex">养护技巧</a>
                                 <span></span>
-                                <a href="#">度夏秘籍</a>
+                                <a href="#" class="ex">度夏秘籍</a>
                                 <span></span>
                             </li>
 
                             <li class="title">文章分类</li>
                             <li class="link">
-                                <a href="#">国内资讯</a>
+                                <a href="#" class="ex">国内资讯</a>
                                 <span></span>
-                                <a href="#">国外咨询</a>
+                                <a href="#" class="ex">国外咨询</a>
                                 <span></span>
-                                <a href="#">萌肉赏析</a>
+                                <a href="#" class="ex">萌肉赏析</a>
                                 <span></span>
-                                <a href="#">创意工坊</a>
+                                <a href="#" class="ex">创意工坊</a>
                                 <span></span>
-                                <a href="#">多肉养护</a>
+                                <a href="#" class="ex">多肉养护</a>
                             <#--<span></span>-->
                             </li>
 
                             <li class="title">论坛板块</li>
                             <li class="link">
-                                <a href="#">问答社区</a>
+                                <a href="#" class="ex">问答社区</a>
                                 <span></span>
-                                <a href="#">达人日志</a>
+                                <a href="#" class="ex">达人日志</a>
                                 <span></span>
-                                <a href="#">美图分享</a>
+                                <a href="#" class="ex">美图分享</a>
                                 <span></span>
                             </li>
                         </ul>
@@ -241,370 +257,51 @@
             <div class="main-cont main-user">
                 <div class="main-cont__title">
                     <h3>达人推荐</h3>
-                    <a href="#" class="more">更多达人 ></a>
+                    <a href="#" class="more" style="color: #fff !important;">更多达人 ></a>
                 </div>
                 <ul class="main-cont__list clearfix">
-                    <li class="item">
-                        <a href="#" class="pic"
-                           style=" background: url(img/cont/user_img1.jpg) no-repeat; background-size: cover; "></a>
-                        <a href="#" class="headImg"><img src="img/cont/head_img1.jpeg" alt="#"></a>
+                    <li class="item" v-for="item in showUsers">
+                        <a :href="'/user/personalCenter/' + item.id" class="pic ex" :style="{ backgroundImage : 'url(' + item.background + ')'}"
+                           style="background: no-repeat; background-size: cover"></a>
+                        <a :href="'/user/personalCenter/' + item.id" class="headImg ex"><img :src="item.avatar" alt="#"></a>
                         <div class="info">
-                            <a href="#" class="info-title">虽虽酱</a>
-                            <p><i class="icon-star"></i>9645</p>
-                            <p>擅长领域: <b>Q版</b></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"
-                           style=" background: url(img/cont/user_img2.jpg) no-repeat; background-size: cover; "></a>
-                        <a href="#" class="headImg"><img src="img/cont/head_img2.jpeg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="info-title">虽虽酱</a>
-                            <p><i class="icon-star"></i>9645</p>
-                            <p>擅长领域: <b>Q版</b></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"
-                           style=" background: url(img/cont/user_img3.jpg) no-repeat; background-size: cover; "></a>
-                        <a href="#" class="headImg"><img src="img/cont/head_img3.jpeg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="info-title">虽虽酱</a>
-                            <p><i class="icon-star"></i>9645</p>
-                            <p>擅长领域: <b>Q版</b></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"
-                           style=" background: url(img/cont/user_img4.jpg) no-repeat; background-size: cover; "></a>
-                        <a href="#" class="headImg"><img src="img/cont/head_img4.jpeg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="info-title">虽虽酱</a>
-                            <p><i class="icon-star"></i>9645</p>
-                            <p>擅长领域: <b>Q版</b></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic"
-                           style=" background: url(img/cont/user_img5.jpg) no-repeat; background-size: cover; "></a>
-                        <a href="#" class="headImg"><img src="img/cont/head_img5.jpeg" alt="#"></a>
-                        <div class="info">
-                            <a href="#" class="info-title">虽虽酱</a>
-                            <p><i class="icon-star"></i>9645</p>
-                            <p>擅长领域: <b>Q版</b></p>
+                            <a :href="'/user/personalCenter/' + item.id" class="info-title ex"><h4 style="padding-top: 10px">{{item.nickName}}</h4></a>
+                            <span class="col-md-5" style="margin-top: 20px">关注 {{item.followedNum}}</span>
+                            <span class="col-md-4" style="margin-top: 20px">粉丝 {{item.followerNum}}</span>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="main-cont main-waterfall">
+            <div class="main-cont main-waterfall" v-if="articles.length != 0">
                 <div class="main-cont__title">
                     <h3>大家正在逛</h3>
                 </div>
-                <ul class="main-cont__list clearfix">
-                    <li class="item item-cur">
+                <ul class="main-cont__list clearfix waterfall">
+                    <li class="item waterfallItem" v-for="item in articles" style="float: left">
                         <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img1.jpg" alt="#">
+                            <img :src="item.img" alt="#">
                         </a>
                         <div class="waterfall-hover">
                             <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
+                            <a href="#" class="btn-collect">收藏 45</a>
                             <a href="#" class="btn-white btn-like"></a>
                             <a href="#" class="btn-white btn-comment"></a>
                         </div>
                         <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
+                            <p class="title">{{item.title}}</p>
                             <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
                         </div>
                         <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img2.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img3.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img4.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img5.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img1.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img2.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img3.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-white btn-comment"></a>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img4.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img5.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img1.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img2.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img3.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img4.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="pic">
-                            <img src="img/cont/waterfall_img5.jpg" alt="#">
-                        </a>
-                        <div class="waterfall-hover">
-                            <span class="mask"></span>
-                            <a href="#" class="btn-collect">收集 45</a>
-                            <a href="#" class="btn-white btn-like"></a>
-                            <a href="#" class="btn-white btn-comment"></a>
-                        </div>
-                        <div class="waterfall-info">
-                            <p class="title">Fendi（芬迪） 2017早春度假系列</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
-                        </div>
-                        <div class="collect-info">
-                            <a href="#" class="headImg"><img src="img/cont/waterfall_headImg1.jpeg" alt="#"></a>
-                            <p class="title"><a href="#">大祁Y</a></p>
-                            <p class="to">收集到<a href="#">时尚语型录</a></p>
+                            <a class="headImg"><img :src="item.authorAvatar"></a>
+                            <p class="title"><i class="fa fa-pencil"></i> 作者: {{item.author}}</p>
+                            <p class="to"><label class="label label-success" v-for="keyword in item.keywordList"
+                                                 style="margin-right: 5px">{{keyword}}</label></p>
                         </div>
                     </li>
                 </ul>
+                <a href="/article/list" id="readMore">浏览更多 ></a>
             </div>
         </div>
-        <a href="#" id="readMore">浏览更多 ></a>
     </div>
 </div>
 <#include 'include/footer.ftl'/>
@@ -618,17 +315,43 @@
                 page: 1,
                 pageSize: 5
             },
-            bannerArticles: []
+            articleInfo: {
+                status: 2,
+                page: 1,
+                pageSize: 20
+            },
+            bannerArticles: [],
+            showUsers: [],
+            articles: []
         },
         created: function () {
-            this.query();
+            this.queryBannerArticles();
+            this.queryShowUsers();
+            this.queryArticles();
         },
         watch: {},
         methods: {
-            query: function () {
+            queryBannerArticles: function () {
                 var url = "/api/article/list";
                 this.$http.post(url, this.bannerInfo).then(function (response) {
                     this.bannerArticles = response.data.data.list;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            queryShowUsers: function () {
+                var url = "/api/user/show";
+                this.$http.post(url).then(function (response) {
+                    this.showUsers = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            queryArticles: function () {
+                var url = "/api/article/list";
+                this.$http.post(url, this.articleInfo).then(function (response) {
+                    this.articles = response.data.data.list;
+                    console.log(this.articles);
                 }, function (error) {
                     swal(error.body.msg);
                 });
