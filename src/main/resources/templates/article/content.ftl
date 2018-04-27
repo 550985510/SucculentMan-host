@@ -15,7 +15,17 @@
             <div class="panel">
                 <div class="panel-body" style="text-align: center">
                     <div class="well">
-                        <h2>{{article.title}}</h2>
+                        <h2>{{article.title}}
+                            <span style="float: right; margin-top: 2px">
+                                <#if Session.user?exists>
+                                    <i v-if="isCollectedFlag" style="color: #f14382" class="fa fa-heart" v-on:click="unCollection"></i>
+                                    <i v-else="" class="fa fa-heart" v-on:click="collection"></i>
+                                <#else>
+                                    <i class="fa fa-heart" v-on:click="alertLogin"></i>
+                                </#if>
+                                <i style="font-size: 14px">{{collectedNum}}</i>
+                            </span>
+                        </h2>
                     </div>
                     <div v-html="article.content"></div>
                 </div>
@@ -46,10 +56,14 @@
         el: '#app',
         data: {
             id: getQueryString("articleId"),
-            article: {}
+            article: {},
+            collectedNum: 0,
+            isCollectedFlag: false
         },
         created: function () {
             this.query();
+            this.isCollected();
+            this.findCollectedNum();
         },
         mounted: function () {
 
@@ -65,6 +79,43 @@
                     if (this.article == null) {
                         window.location.href = "/error_404";
                     }
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            findCollectedNum: function () {
+                var url = "/api/articleCollect/collectedNum?articleId=" + this.id;
+                this.$http.post(url).then(function (response) {
+                    this.collectedNum = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            alertLogin: function () {
+                swal("请先登录!");
+            },
+            isCollected: function () {
+                var url = "/api/articleCollect/isCollected?articleId=" + this.id;
+                this.$http.post(url, this.id).then(function (response) {
+                    this.isCollectedFlag = response.data.data;
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            collection: function () {
+                var url = "/api/articleCollect/collection?articleId=" + this.id;
+                this.$http.post(url, this.id).then(function (response) {
+                    this.isCollectedFlag = true;
+                    this.findCollectedNum();
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            unCollection: function () {
+                var url = "/api/articleCollect/unCollection?articleId=" + this.id;
+                this.$http.post(url, this.id).then(function (response) {
+                    this.isCollectedFlag = false;
+                    this.findCollectedNum();
                 }, function (error) {
                     swal(error.body.msg);
                 });
