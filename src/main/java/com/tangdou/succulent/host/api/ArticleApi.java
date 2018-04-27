@@ -37,7 +37,7 @@ public class ArticleApi {
     @ApiOperation("文章详情")
     public ResponseData detail(@RequestParam("articleId") Integer articleId) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
-        Article article = articleServiceApi.detail(articleId).getData();
+        Article article = articleServiceApi.detail(articleId, 2).getData();
         result.setData(article);
         return result;
     }
