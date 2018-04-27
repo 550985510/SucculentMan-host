@@ -158,4 +158,13 @@ public class UserApi {
         result.setData(list);
         return result;
     }
+
+    @PostMapping("findAll")
+    @ApiOperation("用户列表")
+    public ResponseData findAll(@RequestBody User user) {
+        ResponseData result = new ResponseData();
+        ResponseResult responseResult = userServiceApi.findAllUsers(user);
+        result.setData(responseResult.getData());
+        return result;
+    }
 }

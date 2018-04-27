@@ -254,10 +254,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="main-cont main-user">
+            <div class="main-cont main-user" v-if="showUsers.length != 0">
                 <div class="main-cont__title">
                     <h3>达人推荐</h3>
-                    <a href="#" class="more" style="color: #fff !important;">更多达人 ></a>
+                    <a href="/user/list" class="more" style="color: #fff !important;">更多达人 ></a>
                 </div>
                 <ul class="main-cont__list clearfix">
                     <li class="item" v-for="item in showUsers">

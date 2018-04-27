@@ -11616,12 +11616,6 @@ textarea.textarea-grow:focus {
   border-left: 0;
   border-right: 0;
 }
-.panel-heading + .panel-menu,
-.panel-menu + .panel-body,
-.panel-body + .panel-menu,
-.panel-body + .panel-body {
-  border-top: 0;
-}
 .panel-body {
   position: relative;
   border: 1px solid #e5e5e5;

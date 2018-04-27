@@ -23,4 +23,9 @@ public class UserController {
     public String accountEdit(){
         return "/user/accountEdit";
     }
+
+    @GetMapping("/list")
+    public String list() {
+        return "/user/list";
+    }
 }

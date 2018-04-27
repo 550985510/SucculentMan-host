@@ -17,7 +17,7 @@
                     <div v-if="userInfo.background != null" class="panel-body" align="center" v-bind:style="{ backgroundImage: 'url(' + userInfo.background + ')'}"
                          style="height:270px;  background-size: 100% 50%; background-repeat: no-repeat">
                         <img v-bind:src="userInfo.avatar" class="img-circle"
-                             style="width: 150px; height: 150px; border: 5px solid rgba(250,250,250,0.6)">
+                             style="width: 150px; height: 150px; border: 5px solid rgba(250,250,250)">
                         <h3 style="margin: 10px">{{userInfo.nickName}}</h3>
                         <span class="col-md-5">关注 {{followedNum}}</span>
                         <span class="col-md-4">粉丝 {{followerNum}}</span>
