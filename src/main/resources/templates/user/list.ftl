@@ -13,7 +13,7 @@
 <div id="app" style="background: #fff">
     <section id="content" class="table-layout">
         <div class="tray tray-center">
-            <div class="panel">
+            <div class="panel row">
                 <div class="panel-body" style="width: 42%; float: left; margin: 0 20px 20px 0; border-bottom: 2px solid #e5e5e5" v-for="item in users">
                     <div class="col-md-3">
                         <a :href="'/user/personalCenter/' + item.id">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel" style="margin-top: 60%">
+            <div class="panel">
                 <div id="pageMenu"></div>
             </div>
         </div>
