@@ -6,6 +6,7 @@ import com.tangdou.succulent.host.interceptor.LoginInterceptor;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.model.User;
+import com.tangdou.succulent.manager.api.user.model.UserFollow;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +73,24 @@ public class UserFollowApi {
     public ResponseData followerNum(@RequestParam("followedId") Integer followedId) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
         ResponseResult responseResult = userFollowServiceApi.findUserFollowerNum(followedId);
+        result.setData(responseResult.getData());
+        return result;
+    }
+
+    @PostMapping("followedList")
+    @ApiOperation("用户关注列表")
+    public ResponseData findFollowedList(@RequestBody UserFollow userFollow) {
+        ResponseData result = new ResponseData();
+        ResponseResult responseResult = userFollowServiceApi.findFollowedList(userFollow);
+        result.setData(responseResult.getData());
+        return result;
+    }
+
+    @PostMapping("followerList")
+    @ApiOperation("用户粉丝列表")
+    public ResponseData findFollowerList(@RequestBody UserFollow userFollow) {
+        ResponseData result = new ResponseData();
+        ResponseResult responseResult = userFollowServiceApi.findFollowerList(userFollow);
         result.setData(responseResult.getData());
         return result;
     }

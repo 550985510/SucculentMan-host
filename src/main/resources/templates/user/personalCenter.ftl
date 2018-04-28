@@ -6,6 +6,7 @@
     <title>个人中心 </title>
     <link rel="stylesheet" type="text/css" href="<@s.url '/css/theme.css'/>">
     <link rel="stylesheet" type="text/css" href="<@s.url '/plugins/sweetAlert/sweetalert.css'/>">
+    <link rel="stylesheet" type="text/css" href="<@s.url '/css/jquery.pagination.css'/>">
 </head>
 <body>
 <#include '../header.ftl'/>
@@ -60,24 +61,65 @@
                 <div class="panel-body">
                     <ul id="myTab" class="nav nav-tabs">
                         <li class="active">
-                            <a href="#home" data-toggle="tab" style="border-radius: 8px 8px 0 0">关注的用户</a>
+                            <a href="#followed" data-toggle="tab" style="border-radius: 8px 8px 0 0">关注的用户</a>
                         </li>
                         <li>
-                            <a href="#ios" data-toggle="tab" style="border-radius: 8px 8px 0 0">达人的粉丝</a>
+                            <a href="#follower" data-toggle="tab" style="border-radius: 8px 8px 0 0">达人的粉丝</a>
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content">
-                        <div id="home" class="tab-pane fade in active">
+                        <div id="followed" class="tab-pane fade in active">
                             <div class="panel-body" style="border-top: 0">
-                                <p>
-                                    菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+                                <div class="panel row" v-if="followedList.length != 0">
+                                    <div class="panel-body" style="width: 28%; float: left; margin: 0 7px 14px 7px; border-bottom: 1px solid #e5e5e5" v-for="item in followedList">
+                                        <div class="col-md-3">
+                                            <a :href="'/user/personalCenter/' + item.followedId">
+                                                <img :src="item.avatar" style="width: 60px; height: 60px; border-radius: 60px; border: 1px solid #e5e5e5">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a :href="'/user/personalCenter/' + item.followedId" style="color: #666">
+                                                <h4 style="margin-top: 10px">{{item.nickName}}</h4>
+                                            </a>
+                                            <br>
+                                            <span>关注: {{item.followedNum}}</span>&nbsp;&nbsp;&nbsp;
+                                            <span>粉丝: {{item.followerNum}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" v-else="">
+                                    <h4>暂时没有关注的人</h4>
+                                </div>
+                                <div class="panel row">
+                                    <div id="followedPageMenu"  style="margin: 14px"></div>
+                                </div>
                             </div>
                         </div>
-                        <div id="ios" class="tab-pane fade">
+                        <div id="follower" class="tab-pane fade">
                             <div class="panel-body" style="border-top: 0">
-                                <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
-                                    TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。
-                                </p>
+                                <div class="panel row" v-if="followerList.length != 0">
+                                    <div class="panel-body" style="width: 28%; float: left; margin:0 7px 14px 7px; border-bottom: 1px solid #e5e5e5" v-for="item in followerList">
+                                        <div class="col-md-3">
+                                            <a :href="'/user/personalCenter/' + item.userId">
+                                                <img :src="item.avatar" style="width: 60px; height: 60px; border-radius: 60px; border: 1px solid #e5e5e5">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a :href="'/user/personalCenter/' + item.userId" style="color: #666">
+                                                <h4 style="margin-top: 10px">{{item.nickName}}</h4>
+                                            </a>
+                                            <br>
+                                            <span>关注: {{item.followedNum}}</span>&nbsp;&nbsp;&nbsp;
+                                            <span>粉丝: {{item.followerNum}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" v-else="">
+                                    <h4>暂时没有粉丝</h4>
+                                </div>
+                                <div class="panel row">
+                                    <div id="followerPageMenu" style="margin-left: 14px"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,6 +129,7 @@
     </section>
 </div>
 <#include '../include/footer.ftl'/>
+<script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -97,15 +140,37 @@
             followedNum: 0,
             followerNum: 0,
             showBtn: false,
-            showSaveBtn: false
+            showSaveBtn: false,
+            followedList: [],
+            followerList: [],
+            followedPageInfo: {
+                page: 1,
+                pageSize: 18,
+                userId: ${userId}
+            },
+            followerPageInfo: {
+                page: 1,
+                pageSize: 18,
+                userId: ${userId}
+            }
         },
         created: function () {
             this.query();
             this.isFollowed();
             this.findFollowedNum();
             this.findFollowerNum();
+            this.findFollowedList();
+            this.findFollowerList();
         },
         mounted: function () {
+        },
+        watch: {
+            "followedPageInfo.page": function () {
+                this.findFollowedList();
+            },
+            "followerPageInfo.page": function () {
+                this.findFollowerList();
+            }
         },
         methods: {
             query: function () {
@@ -221,6 +286,58 @@
                     error:function(e){
                         sweetAlert(e.toString());
                     }
+                });
+            },
+            findFollowedList: function () {
+                var url = "/api/follow/followedList";
+                this.$http.post(url, this.followedPageInfo).then(function (response) {
+                    this.followedList = response.data.data.list;
+                    var temp = this;
+                    $("#followedPageMenu").page({//加载分页
+                        total: response.data.data.total,
+                        pageSize: response.data.data.pageSize,
+                        firstBtnText: '首页',
+                        lastBtnText: '尾页',
+                        prevBtnText: '上一页',
+                        nextBtnText: '下一页',
+                        showInfo: true,
+                        showJump: true,
+                        jumpBtnText: '跳转',
+                        infoFormat: '{start} ~ {end}条，共{total}条'
+                    }, response.data.data.page)//传入请求参数
+                            .on("pageClicked", function (event, pageIndex) {
+                                temp.followedPageInfo.page = pageIndex + 1;
+                            }).on('jumpClicked', function (event, pageIndex) {
+                        temp.followedPageInfo.page = pageIndex + 1;
+                    });
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            findFollowerList: function () {
+                var url = "/api/follow/followerList";
+                this.$http.post(url, this.followerPageInfo).then(function (response) {
+                    this.followerList = response.data.data.list;
+                    var temp = this;
+                    $("#followerPageMenu").page({//加载分页
+                        total: response.data.data.total,
+                        pageSize: response.data.data.pageSize,
+                        firstBtnText: '首页',
+                        lastBtnText: '尾页',
+                        prevBtnText: '上一页',
+                        nextBtnText: '下一页',
+                        showInfo: true,
+                        showJump: true,
+                        jumpBtnText: '跳转',
+                        infoFormat: '{start} ~ {end}条，共{total}条'
+                    }, response.data.data.page)//传入请求参数
+                            .on("pageClicked", function (event, pageIndex) {
+                                temp.followerPageInfo.page = pageIndex + 1;
+                            }).on('jumpClicked', function (event, pageIndex) {
+                        temp.followerPageInfo.page = pageIndex + 1;
+                    });
+                }, function (error) {
+                    swal(error.body.msg);
                 });
             }
         }
