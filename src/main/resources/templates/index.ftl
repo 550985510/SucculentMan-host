@@ -61,27 +61,27 @@
                     <!-- 图片 -->
                     <div class="carousel-inner" v-if="bannerArticles.length != 0">
                         <div class="item active">
-                            <a href="#"><img class="img-responsive" :src="bannerArticles[0].img" alt=""
+                            <a :href="'/article/content?articleId=' + bannerArticles[0].id"><img class="img-responsive" :src="bannerArticles[0].img" alt=""
                                              style="width: 712px; height: 445px"></a>
                             <div class="carousel-caption carousel-title">{{bannerArticles[0].title}}</div>
                         </div>
                         <div class="item">
-                            <a href="#"><img class="img-responsive" :src="bannerArticles[1].img" alt=""
+                            <a :href="'/article/content?articleId=' + bannerArticles[1].id"><img class="img-responsive" :src="bannerArticles[1].img" alt=""
                                              style="width: 712px; height: 445px"></a>
                             <div class="carousel-caption carousel-title">{{bannerArticles[1].title}}</div>
                         </div>
                         <div class="item">
-                            <a href="#"><img class="img-responsive" :src="bannerArticles[2].img" alt=""
+                            <a :href="'/article/content?articleId=' + bannerArticles[2].id"><img class="img-responsive" :src="bannerArticles[2].img" alt=""
                                              style="width: 712px; height: 445px"></a>
                             <div class="carousel-caption carousel-title">{{bannerArticles[2].title}}</div>
                         </div>
                         <div class="item">
-                            <a href="#"><img class="img-responsive" :src="bannerArticles[3].img" alt=""
+                            <a :href="'/article/content?articleId=' + bannerArticles[3].id"><img class="img-responsive" :src="bannerArticles[3].img" alt=""
                                              style="width: 712px; height: 445px"></a>
                             <div class="carousel-caption carousel-title">{{bannerArticles[3].title}}</div>
                         </div>
                         <div class="item">
-                            <a href="#"><img class="img-responsive" :src="bannerArticles[4].img" alt=""
+                            <a :href="'/article/content?articleId=' + bannerArticles[4].id"><img class="img-responsive" :src="bannerArticles[4].img" alt=""
                                              style="width: 712px; height: 445px"></a>
                             <div class="carousel-caption carousel-title">{{bannerArticles[4].title}}</div>
                         </div>
