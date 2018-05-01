@@ -71,6 +71,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/api/articleCollect/collection")
                 //文章取消收藏
                 .addPathPatterns("/api/articleCollect/unCollection")
+                //新增文章评论
+                .addPathPatterns("/api/articleComment/add")
                 //文件上传
                 .addPathPatterns("/api/upload/**")
                 //修改个人资料页面接口

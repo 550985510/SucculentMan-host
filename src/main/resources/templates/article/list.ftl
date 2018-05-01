@@ -106,6 +106,10 @@
             articles: []
         },
         created: function () {
+            var moduleId = getQueryString("moduleId");
+            if (moduleId != null && moduleId != '') {
+                this.articleInfo.moduleId = moduleId;
+            }
             this.queryArticles();
         },
         watch: {

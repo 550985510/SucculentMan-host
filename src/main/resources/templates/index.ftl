@@ -118,15 +118,15 @@
 
                             <li class="title">文章分类</li>
                             <li class="link">
-                                <a href="#" class="ex">国内资讯</a>
+                                <a href="/article/list?moduleId=1" class="ex">国内资讯</a>
                                 <span></span>
-                                <a href="#" class="ex">国外咨询</a>
+                                <a href="/article/list?moduleId=2" class="ex">国外咨询</a>
                                 <span></span>
-                                <a href="#" class="ex">萌肉赏析</a>
+                                <a href="/article/list?moduleId=3" class="ex">萌肉赏析</a>
                                 <span></span>
-                                <a href="#" class="ex">创意工坊</a>
+                                <a href="/article/list?moduleId=4" class="ex">创意工坊</a>
                                 <span></span>
-                                <a href="#" class="ex">多肉养护</a>
+                                <a href="/article/list?moduleId=5" class="ex">多肉养护</a>
                             <#--<span></span>-->
                             </li>
 
