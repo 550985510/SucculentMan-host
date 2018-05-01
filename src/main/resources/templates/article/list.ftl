@@ -24,13 +24,46 @@
             -webkit-column-break-inside: avoid;
             break-inside: avoid;
         }
+        a.ex{
+            color: #666;
+            text-decoration: none;
+            cursor:pointer
+        }
+        a.ex:link, a.ex:visited{
+            color: #666 !important;
+            text-decoration: none;
+        }
+        a.ex:hover {
+            color: #f14382 !important;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 <#include '../header.ftl'/>
-<div id="app">
+<div id="app" style="background: #fff">
     <div class="main">
         <div class="main-inner body-width">
+            <div class="panel-body" style="margin-bottom: 20px; width: 1178px; padding-top: 20px; padding-bottom: 25px">
+                <div style="width: 195px; text-align: center; float: left">
+                    <a class="ex" v-on:click="setModule(0)"><h3>全部文章</h3></a>
+                </div>
+                <div style="width: 195px; text-align: center; float: left">
+                    <a class="ex" v-on:click="setModule(1)"><h3>国内资讯</h3></a>
+                </div>
+                <div style="width: 195px; text-align: center; float: left">
+                    <a class="ex" v-on:click="setModule(2)"><h3>国外资讯</h3></a>
+                </div>
+                <div style="width: 195px; text-align: center; float: left">
+                    <a class="ex" v-on:click="setModule(3)"><h3>萌肉赏析</h3></a>
+                </div>
+                <div style="width: 195px; text-align: center; float: left">
+                    <a class="ex" v-on:click="setModule(4)"><h3>创意工坊</h3></a>
+                </div>
+                <div style="width: 195px; text-align: center; float: left">
+                    <a class="ex" v-on:click="setModule(5)"><h3>多肉养护</h3></a>
+                </div>
+            </div>
             <div class="main-cont main-waterfall" v-if="articles.length != 0">
                 <ul class="main-cont__list clearfix waterfall">
                     <li class="item waterfallItem" v-for="item in articles" style="float: left">
@@ -50,7 +83,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="table-responsive" style="padding-bottom: 100px; text-align: center">
+            <div v-else="" style="text-align: center">
+                <h4>没有找到该分类下的文章</h4>
+            </div>
+            <div class="panel" style="padding-bottom: 100px; text-align: center">
                 <div id="pageMenu" style="margin-left: 45%"></div>
             </div>
         </div>
@@ -74,7 +110,7 @@
         },
         watch: {
             "articleInfo.page": function () {
-                this.query();
+                this.queryArticles();
             }
         },
         methods: {
@@ -103,6 +139,19 @@
                 }, function (error) {
                     swal(error.body.msg);
                 });
+            },
+            setModule: function (i) {
+                if (i == 0) {
+                    this.articleInfo.moduleId = null;
+                    this.articleInfo.page = 1;
+                    $('#pageMenu').page('destroy');
+                    this.queryArticles();
+                } else {
+                    this.articleInfo.moduleId = i;
+                    this.articleInfo.page = 1;
+                    $('#pageMenu').page('destroy');
+                    this.queryArticles();
+                }
             }
         }
     });
