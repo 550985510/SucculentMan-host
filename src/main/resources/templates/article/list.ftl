@@ -72,7 +72,10 @@
                         </a>
                         <div class="waterfall-info">
                             <p class="title">{{item.title}}</p>
-                            <p class="icon"><span class="icon-star">89</span><span class="icon-like">10</span></p>
+                            <p style="color: #bbb">
+                                <span class="fa fa-star" style="margin-right: 10px"> {{item.collectedNum}}</span>
+                                <span class="fa fa-comment"> {{item.commentNum}}</span>
+                            </p>
                         </div>
                         <div class="collect-info">
                             <a class="headImg"><img :src="item.authorAvatar"></a>
