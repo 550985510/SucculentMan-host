@@ -132,12 +132,15 @@
 
                             <li class="title">论坛板块</li>
                             <li class="link">
-                                <a href="#" class="ex">问答社区</a>
+                                <a href="/post/list?moduleId=6" class="ex">问答社区</a>
                                 <span></span>
-                                <a href="#" class="ex">达人日志</a>
+                                <a href="/post/list?moduleId=7" class="ex">达人日志</a>
                                 <span></span>
-                                <a href="#" class="ex">美图分享</a>
+                                <a href="/post/list?moduleId=8" class="ex">美图分享</a>
                                 <span></span>
+                                <a href="/post/list?moduleId=9" class="ex">本地寄养</a>
+                                <span></span>
+                                <a href="/post/list?moduleId=10" class="ex">同城交易</a>
                             </li>
                         </ul>
                     </div>

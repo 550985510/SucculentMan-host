@@ -73,6 +73,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/api/articleCollect/unCollection")
                 //新增文章评论
                 .addPathPatterns("/api/articleComment/add")
+                //帖子收藏
+                .addPathPatterns("/api/postCollect/collection")
+                //帖子取消收藏
+                .addPathPatterns("/api/postCollect/unCollection")
+                //新增帖子回帖
+                .addPathPatterns("/api/postComment/add")
+                //发表新帖
+                .addPathPatterns("/api/post/add")
                 //文件上传
                 .addPathPatterns("/api/upload/**")
                 //修改个人资料页面接口

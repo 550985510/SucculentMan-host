@@ -3,6 +3,9 @@ package com.tangdou.succulent.host.config;
 import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleCommentServiceApi;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
+import com.tangdou.succulent.manager.api.post.PostCollectionServiceApi;
+import com.tangdou.succulent.manager.api.post.PostCommentServiceApi;
+import com.tangdou.succulent.manager.api.post.PostServiceApi;
 import com.tangdou.succulent.manager.api.user.UserFollowServiceApi;
 import com.tangdou.succulent.manager.api.user.UserServiceApi;
 import org.springframework.beans.factory.annotation.Value;
@@ -85,6 +88,45 @@ public class HessianConfig {
         HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
         factory.setServiceUrl(MANAGER_HOST + "/hessian/articleCommentServiceApi");
         factory.setServiceInterface(ArticleCommentServiceApi.class);
+        return factory;
+    }
+
+    /**
+     * 帖子收藏相关接口
+     *
+     * @return factory
+     */
+    @Bean("postCollectionServiceApi")
+    public HessianProxyFactoryBean postCollectionServiceApi() {
+        HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
+        factory.setServiceUrl(MANAGER_HOST + "/hessian/postCollectionServiceApi");
+        factory.setServiceInterface(PostCollectionServiceApi.class);
+        return factory;
+    }
+
+    /**
+     * 帖子回帖相关接口
+     *
+     * @return factory
+     */
+    @Bean("postCommentServiceApi")
+    public HessianProxyFactoryBean postCommentServiceApi() {
+        HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
+        factory.setServiceUrl(MANAGER_HOST + "/hessian/postCommentServiceApi");
+        factory.setServiceInterface(PostCommentServiceApi.class);
+        return factory;
+    }
+
+    /**
+     * 文章相关接口
+     *
+     * @return factory
+     */
+    @Bean("postServiceApi")
+    public HessianProxyFactoryBean postServiceApi() {
+        HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
+        factory.setServiceUrl(MANAGER_HOST + "/hessian/postServiceApi");
+        factory.setServiceInterface(PostServiceApi.class);
         return factory;
     }
 

@@ -5,6 +5,7 @@ import com.tangdou.succulent.host.common.ResponseCode;
 import com.tangdou.succulent.host.common.ResponseData;
 import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.article.model.Article;
+import com.tangdou.succulent.manager.api.common.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class ArticleApi {
     @ApiOperation("文章列表")
     public ResponseData list(@RequestBody Article article) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
-        PageInfo<Article> pageInfo = articleServiceApi.list(article);
-        result.setData(pageInfo);
+        ResponseResult responseResult = articleServiceApi.list(article);
+        result.setData(responseResult.getData());
         return result;
     }
 

@@ -140,7 +140,9 @@
 
         },
         watch: {
-
+            "commentInfo.page":function () {
+                this.findComment();
+            }
         },
         methods: {
             query: function () {
@@ -201,7 +203,6 @@
                 var url = "/api/articleComment/add";
                 this.$http.post(url, this.comment).then(function (response) {
                     this.focusFlag = false;
-                    this.comment = null;
                     swal("评论成功！", "", "success");
                     this.findComment();
                 }, function (error) {
