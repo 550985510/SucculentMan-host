@@ -198,61 +198,61 @@
                 <div class="main-cont__title">
                     <h3>单品推荐</h3>
                     <p class="list">
-                        <em>良品购：</em>
+                        <em>糖豆家：</em>
                         <a href="#">全部</a>
                         <span>|</span>
-                        <a href="#">上衣</a>
+                        <a href="#">多肉植物</a>
                         <span>|</span>
-                        <a href="#">裙裤</a>
+                        <a href="#">多肉花器</a>
                         <span>|</span>
-                        <a href="#">配饰</a>
+                        <a href="#">多肉盆器</a>
                         <span>|</span>
-                        <a href="#">鞋子</a>
+                        <a href="#">多肉配土</a>
                         <span>|</span>
-                        <a href="#">包袋</a>
+                        <a href="#">多肉资材</a>
                         <span>|</span>
-                        <a href="#">日杂</a>
+                        <a href="#">周边服务</a>
                     </p>
                 </div>
                 <ul class="main-cont__list clearfix">
                     <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img6.jpg" alt="#"></a>
+                        <a href="#" class="pic"><img :src="showGoods.imgOne" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">夹克</a>
-                            <span>18739人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">良品购</a>
+                            <a href="#" class="title">多肉植物</a>
+                            <span>{{showGoods.sumOne}}人在逛</span>
+                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img7.jpg" alt="#"></a>
+                        <a href="#" class="pic"><img :src="showGoods.imgTwo" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">夹克</a>
-                            <span>18739人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">良品购</a>
+                            <a href="#" class="title">多肉盆器</a>
+                            <span>{{showGoods.sumTwo}}人在逛</span>
+                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img8.jpg" alt="#"></a>
+                        <a href="#" class="pic"><img :src="showGoods.imgThree" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">夹克</a>
-                            <span>18739人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">良品购</a>
+                            <a href="#" class="title">多肉配土</a>
+                            <span>{{showGoods.sumThree}}人在逛</span>
+                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img9.jpg" alt="#"></a>
+                        <a href="#" class="pic"><img :src="showGoods.imgFour" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">夹克</a>
-                            <span>18739人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">良品购</a>
+                            <a href="#" class="title">多肉资材</a>
+                            <span>{{showGoods.sumFour}}人在逛</span>
+                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img src="img/cont/main_img10.jpg" alt="#"></a>
+                        <a href="#" class="pic"><img :src="showGoods.imgFive" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">夹克</a>
-                            <span>18739人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">良品购</a>
+                            <a href="#" class="title">周边服务</a>
+                            <span>{{showGoods.sumFive}}人在逛</span>
+                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                 </ul>
@@ -323,12 +323,14 @@
             },
             bannerArticles: [],
             showUsers: [],
-            articles: []
+            articles: [],
+            showGoods: {}
         },
         created: function () {
             this.queryBannerArticles();
             this.queryShowUsers();
             this.queryArticles();
+            this.queryShowGoods();
         },
         watch: {},
         methods: {
@@ -352,7 +354,15 @@
                 var url = "/api/article/list";
                 this.$http.post(url, this.articleInfo).then(function (response) {
                     this.articles = response.data.data.list;
-                    console.log(this.articles);
+                }, function (error) {
+                    swal(error.body.msg);
+                });
+            },
+            queryShowGoods: function () {
+                var url = "/api/goods/show";
+                this.$http.post(url).then(function (response) {
+                    this.showGoods = response.data.data;
+                    console.log(this.showGoods);
                 }, function (error) {
                     swal(error.body.msg);
                 });
