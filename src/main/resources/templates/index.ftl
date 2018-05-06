@@ -199,60 +199,60 @@
                     <h3>单品推荐</h3>
                     <p class="list">
                         <em>糖豆家：</em>
-                        <a href="#">全部</a>
+                        <a href="/goods/list">全部</a>
                         <span>|</span>
-                        <a href="#">多肉植物</a>
+                        <a href="/goods/list?type=1">多肉植物</a>
                         <span>|</span>
-                        <a href="#">多肉花器</a>
+                        <a href="/goods/list?type=2">多肉花器</a>
                         <span>|</span>
-                        <a href="#">多肉盆器</a>
+                        <a href="/goods/list?type=3">多肉盆器</a>
                         <span>|</span>
-                        <a href="#">多肉配土</a>
+                        <a href="/goods/list?type=4">多肉配土</a>
                         <span>|</span>
-                        <a href="#">多肉资材</a>
+                        <a href="/goods/list?type=5">多肉资材</a>
                         <span>|</span>
-                        <a href="#">周边服务</a>
+                        <a href="/goods/list?type=6">周边服务</a>
                     </p>
                 </div>
                 <ul class="main-cont__list clearfix">
                     <li class="item">
-                        <a href="#" class="pic"><img :src="showGoods.imgOne" width="224px" height="224px"></a>
+                        <a href="/goods/list?type=1" class="pic"><img :src="showGoods.imgOne" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">多肉植物</a>
+                            <a href="/goods/list?type=1" class="title">多肉植物</a>
                             <span>{{showGoods.sumOne}}人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
+                            <a href="/goods/list?type=1" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img :src="showGoods.imgTwo" width="224px" height="224px"></a>
+                        <a href="/goods/list?type=3" class="pic"><img :src="showGoods.imgTwo" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">多肉盆器</a>
+                            <a href="/goods/list?type=3" class="title">多肉盆器</a>
                             <span>{{showGoods.sumTwo}}人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
+                            <a href="/goods/list?type=3" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img :src="showGoods.imgThree" width="224px" height="224px"></a>
+                        <a href="/goods/list?type=4" class="pic"><img :src="showGoods.imgThree" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">多肉配土</a>
+                            <a href="/goods/list?type=4" class="title">多肉配土</a>
                             <span>{{showGoods.sumThree}}人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
+                            <a href="/goods/list?type=4" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img :src="showGoods.imgFour" width="224px" height="224px"></a>
+                        <a href="/goods/list?type=5" class="pic"><img :src="showGoods.imgFour" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">多肉资材</a>
+                            <a href="/goods/list?type=5" class="title">多肉资材</a>
                             <span>{{showGoods.sumFour}}人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
+                            <a href="/goods/list?type=5" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                     <li class="item">
-                        <a href="#" class="pic"><img :src="showGoods.imgFive" width="224px" height="224px"></a>
+                        <a href="/goods/list?type=6" class="pic"><img :src="showGoods.imgFive" width="224px" height="224px"></a>
                         <div class="info">
-                            <a href="#" class="title">周边服务</a>
+                            <a href="/goods/list?type=6" class="title">周边服务</a>
                             <span>{{showGoods.sumFive}}人在逛</span>
-                            <a href="#" class="icon-text__pink purchase">糖豆家</a>
+                            <a href="/goods/list?type=6" class="icon-text__pink purchase">糖豆家</a>
                         </div>
                     </li>
                 </ul>
@@ -362,7 +362,6 @@
                 var url = "/api/goods/show";
                 this.$http.post(url).then(function (response) {
                     this.showGoods = response.data.data;
-                    console.log(this.showGoods);
                 }, function (error) {
                     swal(error.body.msg);
                 });

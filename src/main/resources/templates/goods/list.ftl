@@ -70,7 +70,7 @@
             <div class="main-cont main-waterfall" v-if="goods.length != 0">
                 <ul class="main-cont__list clearfix waterfall">
                     <li class="item waterfallItem" v-for="item in goods" style="float: left">
-                        <a :href="'/goods/content?goodsId=' + item.type" class="pic">
+                        <a :href="'/goods/content?goodsId=' + item.id" class="pic">
                             <img :src="item.img">
                         </a>
                         <div class="waterfall-info">
