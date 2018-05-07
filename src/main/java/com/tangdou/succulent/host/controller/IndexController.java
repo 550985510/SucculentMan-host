@@ -22,6 +22,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/search")
+    public String search(){
+        return "search/search";
+    }
+
     @GetMapping("/header")
     public String header(){
         return "header";

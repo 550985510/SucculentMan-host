@@ -107,10 +107,10 @@
                                 <div id="dt-nav-neck"></div>
                             </div>
                             <div id="dt-search">
-                                <form>
-                                    <input class="ipt" placeholder="搜索感兴趣的内容" type="text"/>
-                                    <button>搜索</button>
-                                </form>
+                                <div>
+                                    <input class="ipt" placeholder="搜索感兴趣的内容" type="text" v-model="searchInfo"/>
+                                    <button v-on:click="search">搜索</button>
+                                </div>
                             </div>
                             <div id="dt-header-right">
                             <#if Session.user?exists>
@@ -241,7 +241,8 @@
             user: {},
             regMobile: {},
             regNickName: {},
-            zIndex: -1
+            zIndex: -1,
+            searchInfo: ''
         },
         created: function () {
 
@@ -381,6 +382,9 @@
                 }, function (error) {
                     swal(error.body.msg);
                 });
+            },
+            search: function () {
+                window.location.href = "/search?info=" + encodeURI(this.searchInfo);
             }
         }
     });

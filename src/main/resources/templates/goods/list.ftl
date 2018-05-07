@@ -111,15 +111,15 @@
             if (type != null && type != '') {
                 this.goodsInfo.type = type;
             }
-            this.querygoods();
+            this.queryGoods();
         },
         watch: {
             "goodsInfo.page": function () {
-                this.querygoods();
+                this.queryGoods();
             }
         },
         methods: {
-            querygoods: function () {
+            queryGoods: function () {
                 var url = "/api/goods/list";
                 this.$http.post(url, this.goodsInfo).then(function (response) {
                     this.goods = response.data.data.list;
@@ -150,12 +150,12 @@
                     this.goodsInfo.type = null;
                     this.goodsInfo.page = 1;
                     $('#pageMenu').page('destroy');
-                    this.querygoods();
+                    this.queryGoods();
                 } else {
                     this.goodsInfo.type = i;
                     this.goodsInfo.page = 1;
                     $('#pageMenu').page('destroy');
-                    this.querygoods();
+                    this.queryGoods();
                 }
             }
         }

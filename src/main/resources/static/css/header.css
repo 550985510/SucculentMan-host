@@ -1534,7 +1534,7 @@ div .ctr-zero {
     color: #666
 }
 
-#dt-nav,#dt-search,#dt-search form {
+#dt-nav,#dt-search,#dt-search div {
     position: relative
 }
 
@@ -2101,7 +2101,7 @@ div .ctr-zero {
     border-bottom-right-radius: 0
 }
 
-#dt-search button,#dt-search form {
+#dt-search button,#dt-search div {
     height: 30px;
     background-color: #fff
 }
@@ -2122,7 +2122,7 @@ div .ctr-zero {
     z-index: 900
 }
 
-#dt-search form {
+#dt-search div {
     width: 364px
 }
 
@@ -2929,7 +2929,7 @@ a.dt-account-btn {
         margin-left: 38px
     }
 
-    #dt-search form {
+    #dt-search div {
         width: 208px
     }
 
