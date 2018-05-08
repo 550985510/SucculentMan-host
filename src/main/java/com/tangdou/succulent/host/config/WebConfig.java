@@ -87,6 +87,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/api/postComment/add")
                 //发表新帖
                 .addPathPatterns("/api/post/add")
+                //订单相关接口
+                .addPathPatterns("/api/order/**")
                 //文件上传
                 .addPathPatterns("/api/upload/**")
                 //修改个人资料页面接口

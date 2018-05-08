@@ -6,6 +6,7 @@ import com.tangdou.succulent.manager.api.article.ArticleServiceApi;
 import com.tangdou.succulent.manager.api.goods.GoodsCollectionServiceApi;
 import com.tangdou.succulent.manager.api.goods.GoodsCommentServiceApi;
 import com.tangdou.succulent.manager.api.goods.GoodsServiceApi;
+import com.tangdou.succulent.manager.api.order.OrderServiceApi;
 import com.tangdou.succulent.manager.api.post.PostCollectionServiceApi;
 import com.tangdou.succulent.manager.api.post.PostCommentServiceApi;
 import com.tangdou.succulent.manager.api.post.PostServiceApi;
@@ -160,7 +161,7 @@ public class HessianConfig {
     }
 
     /**
-     * 文章相关接口
+     * 商品相关接口
      *
      * @return factory
      */
@@ -169,6 +170,19 @@ public class HessianConfig {
         HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
         factory.setServiceUrl(MANAGER_HOST + "/hessian/goodsServiceApi");
         factory.setServiceInterface(GoodsServiceApi.class);
+        return factory;
+    }
+
+    /**
+     * 订单相关接口
+     *
+     * @return factory
+     */
+    @Bean("orderServiceApi")
+    public HessianProxyFactoryBean orderServiceApi() {
+        HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
+        factory.setServiceUrl(MANAGER_HOST + "/hessian/orderServiceApi");
+        factory.setServiceInterface(OrderServiceApi.class);
         return factory;
     }
 

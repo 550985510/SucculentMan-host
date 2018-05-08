@@ -26,7 +26,8 @@
                                         v-else="" v-on:click="collection">
                                     <i class="fa fa-heart"></i> 收藏 {{collectedNum}}
                                 </button>
-                                <button class="btn btn-sm btn-default" style="float: left; margin: 10px 10px 10px 0">
+                                <button class="btn btn-sm btn-default" style="float: left; margin: 10px 10px 10px 0"
+                                        data-toggle='modal' data-target="#buyModule">
                                     <i class="fa fa-shopping-cart"></i> 购买
                                 </button>
                             </div>
@@ -116,6 +117,40 @@
             </div>
         </div>
     </section>
+    <!-- 购买商品 -->
+    <div id="buyModule" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title">购买商品</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">真实姓名</label>
+                        <input class="form-control" v-model="order.userName"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">收货地址</label>
+                        <input class="form-control" v-model="order.location"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="author" class="control-label">购买数量</label>
+                        <input class="form-control" v-model="order.goodsNum"
+                               onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                               onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+                    </div>
+                    <div class="form-group">
+                        共计{{order.amount}}元
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" v-on:click="buy">购买</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 <#include '../include/footer.ftl'/>
 <script src="<@s.url '/js/jquery.pagination-1.2.7.js'/>"></script>
@@ -137,6 +172,9 @@
                 pageSize: 10,
                 deleted: 0,
                 goodsId: getQueryString("goodsId")
+            },
+            order:{
+                goodsNum: 1
             }
         },
         created: function () {
@@ -151,6 +189,9 @@
         watch: {
             "commentInfo.page": function () {
                 this.findComment();
+            },
+            "order.goodsNum": function () {
+                this.order.amount = this.goods.price * this.order.goodsNum;
             }
         },
         methods: {
@@ -158,6 +199,7 @@
                 var url = "/api/goods/detail?goodsId=" + this.id;
                 this.$http.post(url).then(function (response) {
                     this.goods = response.data.data;
+                    this.order.amount = this.goods.price;
                     if (this.goods == null) {
                         window.location.href = "/error_404";
                     }
@@ -243,6 +285,41 @@
                 }, function (error) {
                     swal(error.body.msg);
                 });
+            },
+            buy: function () {
+                var that = this;
+                this.order.goodsName = this.goods.name;
+                this.order.goodsId = this.goods.id;
+                if (this.order.userName == null) {
+                    swal("请输入真实姓名以便邮寄");
+                } else if (this.order.location == null) {
+                    swal("为确保商品准确无误的送到您手中，请输入正确的收货地址");
+                } else if (this.order.goodsNum < 1) {
+                    swal("请选择购买数量");
+                } else {
+                    swal({
+                        title: "确认下单吗？点击确认后将无法撤销",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定！",
+                        cancelButtonText: "取消！",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function (isConfirm) {
+                        if (isConfirm) {
+                            var url = "/api/order/add";
+                            that.$http.post(url, that.order).then(function (response) {
+                                $("#buyModule").modal('hide');
+                                swal("购买成功！", "", "success");
+                            }, function (error) {
+                                swal(error.body.msg);
+                            });
+                        } else {
+                            swal("取消！", "", "error");
+                        }
+                    });
+                }
             }
         }
     });
