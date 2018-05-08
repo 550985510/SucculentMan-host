@@ -4,8 +4,10 @@ import com.tangdou.succulent.host.common.ResponseCode;
 import com.tangdou.succulent.host.common.ResponseData;
 import com.tangdou.succulent.host.interceptor.LoginInterceptor;
 import com.tangdou.succulent.manager.api.article.ArticleCollectionServiceApi;
+import com.tangdou.succulent.manager.api.article.model.ArticleCollection;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
 import com.tangdou.succulent.manager.api.user.model.User;
+import com.tangdou.succulent.manager.api.user.model.UserFollow;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +65,15 @@ public class ArticleCollectionApi {
     public ResponseData collectedNum(@RequestParam("articleId") Integer articleId) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
         ResponseResult responseResult = articleCollectionServiceApi.findCollectedNum(articleId);
+        result.setData(responseResult.getData());
+        return result;
+    }
+
+    @PostMapping("/list")
+    @ApiOperation("用户收藏文章列表")
+    public ResponseData findFollowedList(@RequestBody ArticleCollection articleCollection) {
+        ResponseData result = new ResponseData();
+        ResponseResult responseResult = articleCollectionServiceApi.findList(articleCollection);
         result.setData(responseResult.getData());
         return result;
     }

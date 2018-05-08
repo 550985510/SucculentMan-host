@@ -3,15 +3,14 @@ package com.tangdou.succulent.host.api;
 import com.tangdou.succulent.host.common.ResponseCode;
 import com.tangdou.succulent.host.common.ResponseData;
 import com.tangdou.succulent.host.interceptor.LoginInterceptor;
+import com.tangdou.succulent.manager.api.article.model.ArticleCollection;
 import com.tangdou.succulent.manager.api.post.PostCollectionServiceApi;
 import com.tangdou.succulent.manager.api.common.ResponseResult;
+import com.tangdou.succulent.manager.api.post.model.PostCollection;
 import com.tangdou.succulent.manager.api.user.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -66,6 +65,15 @@ public class PostCollectionApi {
     public ResponseData collectedNum(@RequestParam("postId") Integer postId) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
         ResponseResult responseResult = postCollectionServiceApi.findCollectedNum(postId);
+        result.setData(responseResult.getData());
+        return result;
+    }
+
+    @PostMapping("/list")
+    @ApiOperation("用户收藏帖子列表")
+    public ResponseData findFollowedList(@RequestBody PostCollection postCollection) {
+        ResponseData result = new ResponseData();
+        ResponseResult responseResult = postCollectionServiceApi.findList(postCollection);
         result.setData(responseResult.getData());
         return result;
     }

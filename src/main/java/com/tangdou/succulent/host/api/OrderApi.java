@@ -34,10 +34,8 @@ public class OrderApi {
 
     @PostMapping("/list")
     @ApiOperation("订单列表")
-    public ResponseData list(@RequestBody Order order, HttpSession session) {
+    public ResponseData list(@RequestBody Order order) {
         ResponseData result = ResponseData.success(ResponseCode.SUCCESS);
-        currentUser = (User) session.getAttribute(LoginInterceptor.SESSION_KEY);
-        order.setUserId(currentUser.getId());
         ResponseResult responseResult = orderServiceApi.list(order);
         result.setData(responseResult.getData());
         return result;
