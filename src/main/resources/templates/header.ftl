@@ -43,63 +43,63 @@
                                 <div id="dt-nav-content" class="clr">
                                     <div id="dt-nav-left">
                                         <div class="dt-nav-group">
-                                            <p><a href="index.html">首页</a></p>
-                                            <p><a id="dt-nav-hot-link" href="cats.html">热门</a></p>
+                                            <p><a href="/post/list">论坛</a></p>
+                                            <p><a id="dt-nav-hot-link" href="/article/list">文章</a></p>
                                         </div>
                                         <div class="dt-nav-group" style="margin-top: -30px;">
-                                            <p><a href="shopping.html">良品购</a></p>
+                                            <p><a href="/goods/list">糖豆家</a></p>
                                         </div>
                                     </div>
                                     <div id="dt-nav-right">
                                         <div id="dt-nav-right-inner">
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=home">家居生活</a>
+                                                <a href="/search?info=姬玉露">姬玉露</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=food">美食菜谱</a>
+                                                <a href="/search?info=桃美人">桃美人</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=diy">手工DIY</a>
+                                                <a href="/search?info=熊童子">熊童子</a>
                                             </div>
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=fashion">时尚搭配</a>
+                                                <a href="/search?info=姬胧月">姬胧月</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=beauty">美妆造型</a>
+                                                <a href="/search?info=姬秋丽">姬秋丽</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=wedding">婚纱婚礼</a>
+                                                <a href="/search?info=黑法师">黑法师</a>
                                             </div>
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=design">设计</a>
+                                                <a href="/search?info=雪莲">雪莲</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=chinoiserie">古风</a>
+                                                <a href="/search?info=梦露">梦露</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=painting">插画绘画</a>
+                                                <a href="/search?info=华丽风车">华丽风车</a>
                                             </div>
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=wallpaper">壁纸</a>
+                                                <a href="/search?info=静夜">静夜</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=avatar">头像</a>
+                                                <a href="/search?info=玉蝶">玉蝶</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=quotes">文字句子</a>
+                                                <a href="/search?info=日本小松">日本小松</a>
                                             </div>
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=travel">旅行</a>
+                                                <a href="/search?info=白牡丹">白牡丹</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=photography">摄影</a>
+                                                <a href="/search?info=大和锦">大和锦</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=art">人文艺术</a>
+                                                <a href="/search?info=黑王子">黑王子</a>
                                             </div>
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=movie_music_books">影音书</a>
+                                                <a href="/search?info=乙女心">乙女心</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=celebrity">人物明星</a>
+                                                <a href="/search?info=虹之玉">虹之玉</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=comic">动画漫画</a>
+                                                <a href="/search?info=新玉缀">新玉缀</a>
                                             </div>
                                             <div class="dt-nav-group">
-                                                <a href="cats.html??cat=plant">植物多肉</a>
+                                                <a href="/search?info=蛛丝圈绢">蛛丝圈绢</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=tips">生活百科</a>
+                                                <a href="/search?info=山地玫瑰">山地玫瑰</a>
                                                 <div class="dt-nav-vline"></div>
-                                                <a href="cats.html??cat=moe">搞笑萌宠</a>
+                                                <a href="/search?info=子持莲华">子持莲华</a>
                                             </div>
                                         </div>
                                     </div>

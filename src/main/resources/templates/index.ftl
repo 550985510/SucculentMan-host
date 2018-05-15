@@ -100,19 +100,19 @@
                         <ul>
                             <li class="title">社区热点</li>
                             <li class="link">
-                                <a href="#" class="ex">玉露</a>
+                                <a href="/search?info=玉露" class="ex">玉露</a>
                                 <span></span>
-                                <a href="#" class="ex">桃美人</a>
+                                <a href="/search?info=桃美人" class="ex">桃美人</a>
                                 <span></span>
-                                <a href="#" class="ex">熊童子</a>
+                                <a href="/search?info=熊童子" class="ex">熊童子</a>
                                 <span></span>
-                                <a href="#" class="ex">山地玫瑰</a>
+                                <a href="/search?info=山地玫瑰" class="ex">山地玫瑰</a>
                                 <span></span>
-                                <a href="#" class="ex">韩国多肉</a>
+                                <a href="/search?info=韩国多肉" class="ex">韩国多肉</a>
                                 <span></span>
-                                <a href="#" class="ex">养护技巧</a>
+                                <a href="/search?info=养护技巧" class="ex">养护技巧</a>
                                 <span></span>
-                                <a href="#" class="ex">度夏秘籍</a>
+                                <a href="/search?info=度夏秘籍" class="ex">度夏秘籍</a>
                                 <span></span>
                             </li>
 
