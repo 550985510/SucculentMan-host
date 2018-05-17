@@ -155,7 +155,7 @@
                     'undo'  // 撤销
                 ];
                 // 配置服务器端地址
-                this.editor.customConfig.uploadImgServer = contentPath + '/api/upload/img';
+                this.editor.customConfig.uploadImgServer = '/api/upload/img';
                 // 定义文件名
                 this.editor.customConfig.uploadFileName = 'myFileName';
                 this.editor.customConfig.uploadImgHooks = {
@@ -168,7 +168,7 @@
                         // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
                         // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
                         // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-                        var url = result.msg;
+                        var url = result.data;
                         insertImg(url);
 
                         // result 必须是一个 JSON 格式字符串！！！否则报错
